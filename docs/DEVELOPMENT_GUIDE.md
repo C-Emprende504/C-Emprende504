@@ -1,9 +1,9 @@
 # C-Emprende504 — Guía de Desarrollo y Operaciones Monorepo
 **Proyecto:** C-Emprende504  
-**Rol:** Senior Software Architect & Developer  
+**Rol:** Senior Software Architect & Frontend Lead  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.1.0 (Sprint 2 — Monorepo & npm Workspaces)  
+**Versión:** 1.2.0 (Sprint 3 — Entorno Visual Local & Pruebas)  
 
 ---
 
@@ -16,180 +16,109 @@ Para colaborar en el proyecto se requiere el siguiente entorno de desarrollo:
 
 ---
 
-## 2. Inicialización y Gestión de Dependencias (npm Workspaces)
+## 2. Puesta en Marcha y Servidor de Desarrollo Local
 
-El proyecto utiliza **npm workspaces** para centralizar la administración de dependencias de todas las aplicaciones:
+Para ejecutar el portal localmente en modo desarrollo con recarga rápida (HMR):
 
 ```bash
-# 1. Instalar todas las dependencias del monorepo desde la raíz
+# 1. Asegurar instalación de dependencias en el monorepo
 npm install
 
-# 2. Agregar una dependencia a una aplicación específica (ejemplo: apps/main)
-npm install <paquete> --workspace=@c-emprende504/main
-
-# 3. Agregar una dependencia de desarrollo compartida en la raíz
-npm install -D <herramienta>
-```
-
----
-
-## 3. Comandos de Desarrollo Disponibles
-
-Los scripts en la raíz del monorepo delegan automáticamente las tareas a la aplicación principal (`@c-emprende504/main`):
-
-| Comando desde la Raíz | Equivalente Interno | Propósito |
-| :--- | :--- | :--- |
-| `npm run dev` | `npm run dev --workspace=@c-emprende504/main` | Inicia el servidor de desarrollo local de `apps/main` con HMR. |
-| `npm run build` | `npm run build --workspace=@c-emprende504/main` | Compila la aplicación principal en `apps/main/dist/`. |
-| `npm run preview` | `npm run preview --workspace=@c-emprende504/main` | Previsualiza localmente el artefacto compilado en `apps/main/dist/`. |
-| `npm run check` | `npm run check --workspace=@c-emprende504/main` | Ejecuta diagnósticos de Astro, TypeScript y esquemas Zod. |
-
-Para ejecutar comandos directamente en el directorio de la aplicación:
-```bash
-cd apps/main
+# 2. Iniciar el servidor local de desarrollo desde la raíz
 npm run dev
 ```
 
+### Dirección Local Esperada:
+El servidor local de Astro se levantará en:
+👉 **`http://localhost:4321/`**
+
 ---
 
-## 4. Estructura de Directorios del Monorepo
+## 3. Comandos de Desarrollo Disponibles en el Monorepo
+
+| Comando desde la Raíz | Función Técnica | Cuándo Utilizarlo |
+| :--- | :--- | :--- |
+| `npm run dev` | Ejecuta `astro dev` en `apps/main` en el puerto `4321`. | Durante el diseño y desarrollo de componentes. |
+| `npm run build` | Compila `apps/main` en HTML/CSS estático dentro de `apps/main/dist/`. | Previo a confirmar cambios en Git. |
+| `npm run preview` | Levanta un servidor local estático sobre `apps/main/dist/`. | Para verificar la salida estática final. |
+| `npm run check` | Ejecuta diagnósticos estrictos de TypeScript y Astro en `apps/main`. | En flujos de QA y antes de cada commit. |
+
+---
+
+## 4. Procedimiento de Pruebas y Control de Calidad
+
+Para validar el sitio, el desarrollador debe diferenciar claramente entre **pruebas automatizadas** y **comprobaciones visuales**:
+
+### A. Pruebas Automatizadas (Línea de Comandos)
+1. **Diagnóstico Estático:**
+   ```bash
+   npm run check
+   ```
+   *Debe arrojar 0 errores, 0 advertencias y 0 hints.*
+2. **Compilación de Producción:**
+   ```bash
+   npm run build
+   ```
+   *Debe generar todas las rutas estáticas en `apps/main/dist/` sin excepciones.*
+
+### B. Comprobaciones Visuales y Responsive (En Navegador)
+1. **Verificación de Navegación:**
+   - Clic en el enlace *"Nichos"* del Header: debe desplazarse suavemente a la sección `#nichos`.
+   - Clic en *"Acerca de"*: debe abrir `/about` con estética dark theme.
+   - Clic en enlaces legales del Footer: `/contact`, `/privacy`, `/affiliate-disclosure`.
+2. **Inspección de las Diez Tarjetas:**
+   - Comprobar que se renderizan exactamente las 10 categorías definidas en `src/data/niches.ts`.
+   - Verificar que los iconos vectoriales SVG se visualicen con nitidez y acento naranja.
+   - Comprobar que los badges reflejen el estado (*"En Planificación"* o *"En Preparación"*).
+   - Verificar que no existan enlaces rotos a productos ni precios inventados.
+3. **Prueba de Adaptabilidad Responsive (DevTools):**
+   - **Móvil Pequeño (320px - 375px):** Comprobar que no hay desbordamiento horizontal (`overflow-x`), los textos se leen cómodamente y el menú hamburguesa abre y cierra correctamente.
+   - **Móvil Estándar (390px - 430px):** Cuadrícula de 1 columna fluida con márgenes laterales de 16px.
+   - **Tablet (768px):** Cuadrícula de 2 columnas balanceadas.
+   - **Escritorio (1024px y superior):** Cuadrícula de 3 columnas con espaciado amplio de 24px/32px.
+4. **Verificación de Accesibilidad (A11y):**
+   - Navegación exclusiva por teclado (Tab / Shift+Tab): verificar que el foco visible (`outline: 2px solid #FF5A00`) se aprecie claramente en todos los botones y enlaces.
+   - Presionar `Escape` con el menú móvil abierto para confirmar que se cierra y devuelve el foco al botón de apertura.
+
+---
+
+## 5. Estructura de Componentes y Datos
 
 ```text
-C-Emprende504/
-├── apps/                                 # Aplicaciones independientes
-│   └── main/                             # Sitio principal de C-Emprende504
-│       ├── public/                       # Activos estáticos directos
-│       │   ├── favicon.svg               # Favicon
-│       │   └── media/                    # Multimedia estática
-│       │       ├── downloads/            # Documentos descargables (.gitkeep)
-│       │       └── videos/               # (.gitkeep - Prohibido subir videos pesados)
-│       ├── src/                          # Código fuente de Astro
-│       │   ├── assets/                   # Imágenes e iconos procesados por Astro
-│       │   │   ├── icons/                # (.gitkeep)
-│       │   │   └── images/               # (.gitkeep)
-│       │   ├── components/               # Header, Footer, Button
-│       │   ├── content/                  # Colección tipada products (0 productos)
-│       │   │   └── products/             # (.gitkeep)
-│       │   ├── layouts/                  # BaseLayout.astro
-│       │   ├── pages/                    # index, about, contact, privacy, affiliate-disclosure
-│       │   ├── styles/                   # global.css y variables.css
-│       │   └── content.config.ts         # Esquema Zod con affiliateUrl opcional
-│       ├── astro.config.mjs              # Configuración SSG
-│       ├── package.json                  # @c-emprende504/main
-│       └── tsconfig.json                 # TypeScript estricto
-├── packages/                             # Espacio para futuras bibliotecas compartidas
-│   └── README.md                         # Lineamientos de abstracción (YAGNI)
-├── docs/                                 # Documentación técnica y estratégica
-│   ├── ARCHITECTURE.md
-│   ├── DEVELOPMENT_GUIDE.md
-│   ├── INITIAL_TECHNICAL_ASSESSMENT.md
-│   ├── MULTI_SITE_STRATEGY.md
-│   └── PROJECT_DISCOVERY.md
-├── package.json                          # Configuración raíz de npm workspaces
-├── package-lock.json                     # Lockfile sincronizado del monorepo
-└── .gitignore                            # Exclusiones de Git optimizadas
+apps/main/src/
+├── data/
+│   └── niches.ts                 # Fuente de verdad de los 10 nichos (inmutable)
+├── components/
+│   ├── layout/
+│   │   ├── Header.astro          # Cabecera sticky con menú responsive
+│   │   └── Footer.astro          # Pie con avisos de transparencia y páginas legales
+│   ├── ui/
+│   │   ├── Badge.astro           # Chip de estado (planning, preparation)
+│   │   ├── Button.astro          # Botón accesible (primary, secondary, outline)
+│   │   └── SectionHeading.astro  # Título y descripción modular de sección
+│   ├── niches/
+│   │   ├── NicheCard.astro       # Tarjeta individual de nicho
+│   │   └── NicheGrid.astro       # Cuadrícula responsiva que mapea NICHES_DATA
+│   └── home/
+│       ├── HeroSection.astro     # Portada principal con resplandor naranja y CTAs
+│       └── PlatformOverview.astro# Pilares arquitectónicos del ecosistema
+├── pages/
+│   ├── index.astro               # Ensamblaje de la portada
+│   ├── about.astro               # Principios del proyecto
+│   ├── contact.astro             # Canales técnicos
+│   ├── privacy.astro             # Privacidad
+│   └── affiliate-disclosure.astro# Transparencia FTC
+└── styles/
+    ├── variables.css             # Tokens CSS (Dark theme: #0B0B0B, #141414, #FF5A00)
+    └── global.css                # Reset, A11y y utilidades
 ```
 
 ---
 
-## 5. Procedimiento para Agregar un Nuevo Micrositio
+## 6. Procedimiento para Modificar o Activar un Nicho Futuro
 
-Cuando el Project Manager autorice la apertura de un nuevo micrositio vertical (ejemplo: `apps/bienestar`):
-
-1. **Crear el directorio:**
-   ```bash
-   mkdir -p apps/bienestar
-   ```
-2. **Crear su `package.json` propio:**
-   ```json
-   {
-     "name": "@c-emprende504/bienestar",
-     "version": "0.1.0",
-     "type": "module",
-     "private": true,
-     "scripts": {
-       "dev": "astro dev",
-       "build": "astro build",
-       "preview": "astro preview",
-       "check": "astro check"
-     },
-     "dependencies": {
-       "astro": "^7.4.12"
-     },
-     "devDependencies": {
-       "@astrojs/check": "^0.9.12",
-       "typescript": "^6.0.3"
-     }
-   }
-   ```
-3. **Copiar la configuración de `astro.config.mjs` y `tsconfig.json`:**  
-   Garantizando `output: 'static'`.
-4. **Ejecutar `npm install` desde la raíz:**  
-   npm workspaces vinculará automáticamente el nuevo workspace sin duplicar dependencias comunes.
-5. **Añadir el script en el `package.json` raíz:**
-   ```json
-   "build:bienestar": "npm run build --workspace=@c-emprende504/bienestar"
-   ```
-
----
-
-## 6. Procedimiento para Incorporar un Producto (Borrador vs Publicado)
-
-El esquema tipado permite dos modalidades de ficha técnica en `apps/main/src/content/products/`:
-
-### A. Ficha Técnica en Borrador (`status: "draft"`)
-Permite documentar un infoproducto en evaluación sin disponer aún de un enlace de afiliado autorizado:
-
-```json
-{
-  "title": "Nombre Oficial del Curso",
-  "slug": "nombre-oficial-curso",
-  "description": "Descripción verificada provista por el productor en Hotmart.",
-  "category": "Salud y Bienestar",
-  "status": "draft"
-}
-```
-
-### B. Producto Publicado (`status: "published"`)
-Requiere obligatoriamente un enlace `affiliateUrl` válido para compilar exitosamente:
-
-```json
-{
-  "title": "Nombre Oficial del Curso",
-  "slug": "nombre-oficial-curso",
-  "description": "Descripción verificada provista por el productor en Hotmart.",
-  "category": "Salud y Bienestar",
-  "affiliateUrl": "https://go.hotmart.com/A12345678Z?sck=c_emprende504",
-  "benefits": ["Acceso vitalicio", "Garantía oficial de 7 días"],
-  "targetAudience": ["Personas interesadas en bienestar integral"],
-  "frequentlyAskedQuestions": [
-    {
-      "question": "¿Cómo recibo el acceso?",
-      "answer": "Acceso inmediato por correo electrónico tras procesar el pago en Hotmart."
-    }
-  ],
-  "status": "published",
-  "publishedAt": "2026-11-20T00:00:00Z"
-}
-```
-
----
-
-## 7. Manejo de Recursos Multimedia
-
-1. **Imágenes e Iconos:** Guardar en `apps/[app-name]/src/assets/images/` y `apps/[app-name]/src/assets/icons/`.
-2. **Archivos Descargables:** Guardar en `apps/[app-name]/public/media/downloads/`.
-3. **Videos:** **NO almacenar videos de gran tamaño en el repositorio.** Utilizar enlaces o reproductores embebidos de YouTube no listado, Vimeo o servicios de streaming dedicados.
-
----
-
-## 8. Flujo de Trabajo en Git (Git Workflow)
-
-1. **Convención de Commits (Conventional Commits):**
-   - `chore(monorepo):` Cambios en workspaces o configuración raíz.
-   - `feat(main):` Funcionalidad en el sitio principal.
-   - `feat(nicho):` Funcionalidad en un micrositio específico.
-   - `docs:` Actualización de documentación.
-   - `style:`, `refactor:`, `fix:`
-2. **Control de Calidad Pre-Commit:**
-   - Ejecutar siempre `npm run check` y `npm run build` antes de realizar un commit.
+Cuando un nicho vertical sea aprobado por el Project Manager para su conversión en micrositio:
+1. Abrir `apps/main/src/data/niches.ts`.
+2. Actualizar el estado de dicho nicho a `'active'`.
+3. Asignar el enlace correspondiente (ej. `https://finanzas.dominio.com` o la ruta de staging correspondiente).
+4. El componente `NicheCard.astro` detectará automáticamente el estado y transformará la tarjeta en un enlace activo al micrositio.
