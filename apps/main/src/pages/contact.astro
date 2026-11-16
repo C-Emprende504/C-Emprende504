@@ -10,27 +10,28 @@ import Button from '../components/ui/Button.astro';
   <div class="section">
     <div class="container container-narrow">
       <article class="content-article">
+        <span class="eyebrow-tag">Canal Técnico</span>
         <h1>Contacto y Supervisión del Proyecto</h1>
         <p class="lead">
-          Para consultas relacionadas con la arquitectura técnica, gobernanza o desarrollo de la plataforma C-Emprende504.
+          Para consultas relacionadas con la arquitectura técnica, gobernanza o desarrollo del monorepo C-Emprende504.
         </p>
 
         <div class="info-block">
-          <h2>Canal Técnico</h2>
+          <h2>Supervisión Técnica</h2>
           <p>
-            Durante las fases iniciales de desarrollo (Sprint 0 y Sprint 1), la supervisión y gestión técnica del proyecto se realiza a través de la dirección del <strong>Project Manager (ChatGPT)</strong> y el repositorio de control de versiones.
+            Durante las fases actuales de desarrollo, la supervisión técnica del proyecto se realiza a través de la dirección del <strong>Project Manager (ChatGPT)</strong> y el repositorio de control de versiones central.
           </p>
           <ul class="contact-details">
             <li><strong>Entorno de Desarrollo:</strong> Antigravity AI</li>
-            <li><strong>Control de Versiones:</strong> Repositorio Git local (preparado para GitHub)</li>
+            <li><strong>Control de Versiones:</strong> Repositorio Git central (Monorepo con npm workspaces)</li>
             <li><strong>Hosting de Destino:</strong> Cloudflare Pages</li>
           </ul>
         </div>
 
         <div class="notice-block">
-          <h2>Atención al Cliente y Soporte de Productos</h2>
+          <h2>Atención al Consumidor y Soporte Comercial</h2>
           <p>
-            Dado que la plataforma se encuentra en fase de cimientos técnicos sin productos comerciales activos, los canales de atención al consumidor final se habilitarán formalmente en fases posteriores junto con la integración de los infoproductos autorizados de Hotmart.
+            Dado que la plataforma se encuentra en fase de diseño y cimientos sin productos comerciales activos, los canales de atención al consumidor final se habilitarán formalmente cuando se publiquen los primeros micrositios de nicho autorizados.
           </p>
         </div>
 
@@ -57,6 +58,24 @@ import Button from '../components/ui/Button.astro';
     }
   }
 
+  .eyebrow-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+  }
+
+  h1 {
+    margin-bottom: var(--space-4);
+  }
+
   .lead {
     font-size: var(--text-lg);
     color: var(--color-text);
@@ -64,15 +83,15 @@ import Button from '../components/ui/Button.astro';
   }
 
   .info-block {
-    background-color: var(--color-surface-subtle);
+    background-color: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: var(--space-5);
+    padding: var(--space-6);
     margin-bottom: var(--space-6);
   }
 
   .info-block h2 {
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     margin-bottom: var(--space-2);
   }
 
@@ -80,19 +99,22 @@ import Button from '../components/ui/Button.astro';
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
+    margin-top: var(--space-3);
   }
 
   .contact-details li {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
   }
 
   .notice-block {
-    border-left: 4px solid var(--color-warning);
-    background-color: var(--color-warning-bg);
-    padding: var(--space-4);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border-left: 4px solid var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-border);
+    border-left-width: 4px;
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
     margin-bottom: var(--space-6);
   }
 
@@ -110,5 +132,7 @@ import Button from '../components/ui/Button.astro';
 
   .cta-wrapper {
     margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
   }
 </style>

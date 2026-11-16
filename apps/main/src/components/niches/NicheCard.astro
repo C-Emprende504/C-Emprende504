@@ -1,0 +1,157 @@
+---
+import type { NicheCategory } from '../../data/niches';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  niche: NicheCategory;
+}
+
+const { niche } = Astro.props;
+---
+
+<article class="niche-card" aria-labelledby={`niche-title-${niche.id}`}>
+  <div class="card-header">
+    <div class="icon-wrapper" aria-hidden="true" set:html={niche.iconSvg} />
+    <span class="order-badge" aria-label={`Identificador ${niche.orderNumber}`}>
+      #{niche.orderNumber}
+    </span>
+  </div>
+
+  <div class="card-body">
+    <h3 class="niche-title" id={`niche-title-${niche.id}`}>
+      {niche.name}
+    </h3>
+    <p class="niche-description">
+      {niche.shortDescription}
+    </p>
+  </div>
+
+  <div class="card-footer">
+    <Badge variant={niche.status === 'preparation' ? 'preparation' : 'planning'}>
+      {niche.statusLabel}
+    </Badge>
+    <span class="microsite-indicator" title="Micrositio independiente en fase de estudio técnico">
+      <span class="indicator-text">Próximo Hub</span>
+    </span>
+  </div>
+</article>
+
+<style>
+  .niche-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 240px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Efecto de borde y sutil resplandor en hover */
+  .niche-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Línea superior sutil con acento naranja en hover */
+  .niche-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .niche-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+  }
+
+  .icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .niche-card:hover .icon-wrapper {
+    background-color: var(--color-primary-subtle);
+    border-color: var(--color-primary-border);
+  }
+
+  .order-badge {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--color-text-subtle);
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-body {
+    flex: 1;
+    margin-bottom: var(--space-5);
+  }
+
+  .niche-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+    letter-spacing: -0.01em;
+  }
+
+  .niche-description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-surface-subtle);
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .microsite-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    font-weight: 500;
+  }
+
+  .indicator-text {
+    letter-spacing: 0.02em;
+  }
+</style>

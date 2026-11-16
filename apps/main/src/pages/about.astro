@@ -10,29 +10,31 @@ import Button from '../components/ui/Button.astro';
   <div class="section">
     <div class="container container-narrow">
       <article class="content-article">
+        <span class="eyebrow-tag">Documentación de Plataforma</span>
         <h1>Acerca de C-Emprende504</h1>
         <p class="lead">
-          C-Emprende504 es un proyecto de arquitectura web concebido para la promoción curada y ética de productos educativos digitales a través de la infraestructura de afiliados de Hotmart.
+          C-Emprende504 es un proyecto de arquitectura web concebido como un monorepo central para la articulación de hubs especializados en educación digital y marketing de afiliados ético.
         </p>
 
         <h2>1. Principios Técnicos Fundamentales</h2>
         <p>
-          La arquitectura del sitio sigue rigurosamente diez directrices de ingeniería establecidas en la fase de descubrimiento:
+          La arquitectura del sitio sigue rigurosamente las directrices de ingeniería establecidas en la fase de descubrimiento y escalabilidad:
         </p>
-        <ul>
-          <li><strong>Salida Estática Pura (SSG):</strong> Compilación completa de HTML en tiempo de construcción, eliminando la necesidad de servidores Node.js activos en producción.</li>
-          <li><strong>Cero Coste Recurrente:</strong> Alojar y distribuir la aplicación a través de la red global Anycast de Cloudflare Pages sin incurrir en costes de infraestructura fijos.</li>
-          <li><strong>Desacoplamiento de Datos:</strong> El catálogo de productos se gestionará mediante colecciones de contenido tipadas, separando completamente los datos del diseño visual.</li>
-          <li><strong>Enfoque Mobile-First:</strong> Priorización absoluta de la experiencia y velocidad de carga en dispositivos móviles con conexiones celulares 3G/4G.</li>
-          <li><strong>Cumplimiento Normativo:</strong> Transparencia total de afiliación y respeto a las políticas de privacidad y directrices publicitarias.</li>
+        <ul class="principles-list">
+          <li><strong>Arquitectura Monorepo (npm workspaces):</strong> Administración centralizada del código del sitio principal (<code>apps/main</code>) y futuros micrositios independientes (<code>apps/[nicho]</code>).</li>
+          <li><strong>Salida Estática Pura (SSG):</strong> Compilación completa de HTML en tiempo de construcción con Astro 7, eliminando servidores Node.js activos en producción.</li>
+          <li><strong>Cero Coste Recurrente:</strong> Alojamiento y distribución en la red global Anycast de Cloudflare Pages sin costes fijos de infraestructura.</li>
+          <li><strong>Desacoplamiento de Datos:</strong> Catálogo de productos y nichos gestionado mediante datos estructurados tipados, separando el diseño del contenido.</li>
+          <li><strong>Enfoque Mobile-First & Accesibilidad:</strong> Experiencia optimizada prioritariamente para teléfonos móviles bajo estándares WCAG 2.1 AA.</li>
+          <li><strong>Transparencia Normativa:</strong> Cumplimiento estricto de directrices de divulgación de afiliación (FTC) y políticas publicitarias de Meta y Google.</li>
         </ul>
 
         <h2>2. Estado del Desarrollo</h2>
         <p>
-          Actualmente el proyecto se encuentra en <strong>Sprint 1 (Cimientos de Infraestructura)</strong> bajo la supervisión del Project Manager (ChatGPT). En esta etapa se ha inicializado el repositorio de código, el sistema tipado de colecciones de contenido y la biblioteca de componentes reutilizables.
+          Actualmente el proyecto se encuentra en <strong>Sprint 3 (Diseño Visual y Experiencia de Usuario)</strong> bajo la supervisión del Project Manager (ChatGPT). Se ha implementado la primera versión visual navegable con estética en modo oscuro, acentos en naranja y el catálogo de diez nichos potenciales en preparación.
         </p>
         <p>
-          No se han incorporado productos comerciales ni campañas promocionales hasta que el modelo y catálogo sean aprobados por la dirección del proyecto.
+          No se han incorporado productos comerciales ni campañas promocionales hasta que el modelo y catálogo sean validados y aprobados por la dirección del proyecto.
         </p>
 
         <div class="cta-wrapper">
@@ -59,21 +61,63 @@ import Button from '../components/ui/Button.astro';
     }
   }
 
+  .eyebrow-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+  }
+
+  h1 {
+    margin-bottom: var(--space-4);
+  }
+
   .lead {
     font-size: var(--text-lg);
     color: var(--color-text);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
   }
 
   h2 {
     margin-top: var(--space-8);
     margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+  }
+
+  .principles-list {
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-6);
+  }
+
+  .principles-list li {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-muted);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    padding: 0.125rem var(--space-1);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
   }
 
   .cta-wrapper {
     margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-4);
     flex-wrap: wrap;
   }
 </style>

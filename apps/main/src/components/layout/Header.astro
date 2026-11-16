@@ -7,24 +7,22 @@ const { currentPath = Astro.url.pathname } = Astro.props;
 
 const navItems = [
   { href: '/', label: 'Inicio' },
+  { href: '/#nichos', label: 'Nichos' },
   { href: '/about', label: 'Acerca de' },
-  { href: '/contact', label: 'Contacto' },
-  { href: '/affiliate-disclosure', label: 'Aviso de Afiliación' },
-  { href: '/privacy', label: 'Privacidad' },
 ];
 
 const isActive = (href: string) => {
   if (href === '/' && currentPath === '/') return true;
-  if (href !== '/' && currentPath.startsWith(href)) return true;
+  if (href === '/about' && currentPath === '/about') return true;
   return false;
 };
 ---
 
 <header class="site-header">
   <div class="container header-container">
-    <a href="/" class="brand-link" aria-label="C-Emprende504 - Página Principal">
+    <a href="/" class="brand-link" aria-label="C-Emprende504 - Portal Principal">
       <span class="brand-text">C-Emprende<span class="brand-accent">504</span></span>
-      <span class="env-tag">Dev</span>
+      <span class="brand-badge" aria-label="Versión preliminar">Portal</span>
     </a>
 
     <button
@@ -56,13 +54,22 @@ const isActive = (href: string) => {
           ))
         }
       </ul>
+
+      <div class="header-cta">
+        <a href="/#nichos" class="cta-link">
+          Ver Nichos
+          <span class="cta-dot" aria-hidden="true"></span>
+        </a>
+      </div>
     </nav>
   </div>
 </header>
 
 <style>
   .site-header {
-    background-color: var(--color-surface);
+    background-color: rgba(11, 11, 11, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
@@ -80,37 +87,46 @@ const isActive = (href: string) => {
   .brand-link {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
     text-decoration: none;
-    font-weight: 700;
-    font-size: var(--text-xl);
+    font-weight: 800;
+    font-size: var(--text-lg);
     color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .brand-link {
+      font-size: var(--text-xl);
+    }
   }
 
   .brand-accent {
     color: var(--color-primary);
   }
 
-  .env-tag {
+  .brand-badge {
     font-size: var(--text-xs);
-    font-weight: 600;
-    background-color: var(--color-surface-subtle);
-    color: var(--color-text-subtle);
-    padding: 0.125rem var(--space-2);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary-border);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
   }
 
   .primary-nav {
     display: flex;
     align-items: center;
+    gap: var(--space-6);
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -122,7 +138,7 @@ const isActive = (href: string) => {
 
   .nav-link {
     display: inline-block;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-4);
     color: var(--color-text-muted);
     text-decoration: none;
     font-weight: 500;
@@ -134,14 +150,53 @@ const isActive = (href: string) => {
   .nav-link:hover {
     color: var(--color-text);
     background-color: var(--color-surface-subtle);
+    text-decoration: none;
   }
 
   .nav-link.active {
-    color: var(--color-primary);
+    color: var(--color-text);
     font-weight: 600;
-    background-color: var(--color-primary-light);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
   }
 
+  .header-cta {
+    display: flex;
+    align-items: center;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .cta-link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(255, 90, 0, 0.2);
+  }
+
+  .cta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+
+  /* Botón hamburguesa accesible para móvil */
   .mobile-toggle {
     display: none;
     background: transparent;
@@ -155,6 +210,7 @@ const isActive = (href: string) => {
     justify-content: center;
     align-items: center;
     gap: 4px;
+    color: var(--color-text);
   }
 
   .toggle-bar {
@@ -178,13 +234,16 @@ const isActive = (href: string) => {
       right: 0;
       background-color: var(--color-surface);
       border-bottom: 1px solid var(--color-border);
-      padding: var(--space-4);
+      padding: var(--space-6) var(--space-4);
       display: none;
-      box-shadow: var(--shadow-md);
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+      box-shadow: var(--shadow-lg);
     }
 
     .primary-nav.is-open {
-      display: block;
+      display: flex;
     }
 
     .nav-list {
@@ -194,14 +253,26 @@ const isActive = (href: string) => {
     }
 
     .nav-link {
-      padding: var(--space-3);
+      padding: var(--space-3) var(--space-4);
       font-size: var(--text-base);
+    }
+
+    .header-cta {
+      justify-content: center;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .cta-link {
+      width: 100%;
+      justify-content: center;
+      padding: var(--space-3);
     }
   }
 </style>
 
 <script>
-  // Script accesible y sin dependencias para el menú de navegación móvil
+  // Control accesible del menú móvil
   const toggleBtn = document.getElementById('mobile-nav-toggle');
   const navMenu = document.getElementById('primary-navigation');
 
@@ -216,13 +287,22 @@ const isActive = (href: string) => {
       );
     });
 
-    // Cerrar al presionar Escape
+    // Cerrar menú al presionar Escape o al hacer clic en un enlace
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
         navMenu.classList.remove('is-open');
         toggleBtn.setAttribute('aria-expanded', 'false');
         toggleBtn.focus();
       }
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('is-open')) {
+          navMenu.classList.remove('is-open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
   }
 </script>

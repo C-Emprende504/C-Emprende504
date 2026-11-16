@@ -1,44 +1,52 @@
 /**
- * C-Emprende504 — Variables Globales de Diseño
- * Sistema de diseño neutral, accesible y adaptativo para la fase de cimientos.
+ * C-Emprende504 — Variables Globales de Diseño (Sprint 3: Dark Theme & Accent Orange)
+ * Paleta profesional, moderna y accesible basada en la referencia visual del proyecto.
+ * NOTA: Esta identidad visual es preliminar y está sujeta a aprobación de la marca definitiva.
  */
 
 :root {
-  /* Paleta de Colores Neutros y Base */
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-surface-subtle: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
+  /* 1. Paleta de Fondo y Superficie (Dark Theme) */
+  --color-bg: #0b0b0b;              /* Fondo principal profundo */
+  --color-surface: #141414;         /* Fondo de tarjetas y contenedores */
+  --color-surface-subtle: #1a1a1a;  /* Superficie secundaria / hover */
+  --color-surface-elevated: #202020;/* Superficie de elementos flotantes o activos */
 
-  /* Tipografía y Contraste de Texto (WCAG 2.1 AA) */
-  --color-text: #0f172a;
-  --color-text-muted: #475569;
-  --color-text-subtle: #64748b;
-  --color-text-inverse: #ffffff;
+  /* 2. Bordes y Delimitadores */
+  --color-border: #292929;          /* Borde sutil estándar */
+  --color-border-hover: #3f3f46;    /* Borde en hover */
+  --color-border-focus: #ff5a00;    /* Borde en estado de foco accesible */
 
-  /* Colores de Acento Neutrales (Placeholder técnico previo a identidad definitiva) */
-  --color-primary: #0284c7;
-  --color-primary-hover: #0369a1;
-  --color-primary-light: #e0f2fe;
-  --color-primary-text: #0c4a6e;
+  /* 3. Tipografía y Contraste (WCAG 2.1 AA Compliant) */
+  --color-text: #ffffff;            /* Texto principal: Contraste > 19:1 contra #0B0B0B */
+  --color-text-muted: #a1a1aa;      /* Texto secundario: Contraste > 7.5:1 contra #141414 */
+  --color-text-subtle: #71717a;     /* Texto terciario y leyendas */
+  --color-text-inverse: #0b0b0b;    /* Texto para botones con fondo claro o acento */
 
-  --color-secondary: #334155;
-  --color-secondary-hover: #1e293b;
+  /* 4. Acentos de Color (Naranja & Estados) */
+  --color-primary: #ff5a00;         /* Naranja de acento visual */
+  --color-primary-hover: #ff7324;   /* Naranja hover */
+  --color-primary-subtle: rgba(255, 90, 0, 0.12); /* Fondo de chips e iconos */
+  --color-primary-border: rgba(255, 90, 0, 0.35); /* Borde sutil de acento */
+  --color-primary-text: #0b0b0b;    /* Texto de alto contraste sobre botón naranja */
 
-  /* Estados y Alertas */
-  --color-info: #0284c7;
-  --color-info-bg: #f0f9ff;
-  --color-info-border: #bae6fd;
-  --color-warning: #d97706;
-  --color-warning-bg: #fffbeb;
-  --color-warning-border: #fde68a;
+  --color-secondary: #27272a;       /* Superficie botón secundario */
+  --color-secondary-hover: #3f3f46; /* Superficie botón secundario hover */
+  --color-secondary-text: #ffffff;  /* Texto botón secundario */
 
-  /* Tipografía */
+  /* 5. Estados de Disponibilidad (Badges de Nichos) */
+  --color-status-planning-bg: rgba(255, 90, 0, 0.1);
+  --color-status-planning-text: #ff8533;
+  --color-status-planning-border: rgba(255, 90, 0, 0.3);
+
+  --color-status-prep-bg: rgba(161, 161, 170, 0.1);
+  --color-status-prep-text: #d4d4d8;
+  --color-status-prep-border: rgba(161, 161, 170, 0.25);
+
+  /* 6. Tipografía Moderna y Legible */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Escala Modular de Tamaños de Fuente */
+  /* Escala Modular de Fuentes */
   --text-xs: 0.75rem;    /* 12px */
   --text-sm: 0.875rem;   /* 14px */
   --text-base: 1rem;     /* 16px */
@@ -47,13 +55,15 @@
   --text-2xl: 1.5rem;    /* 24px */
   --text-3xl: 1.875rem;  /* 30px */
   --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
 
   /* Alturas de Línea */
-  --leading-tight: 1.25;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
   --leading-normal: 1.5;
   --leading-relaxed: 1.7;
 
-  /* Espaciado Modular */
+  /* 7. Espaciado Modular */
   --space-1: 0.25rem;   /* 4px */
   --space-2: 0.5rem;    /* 8px */
   --space-3: 0.75rem;   /* 12px */
@@ -64,24 +74,27 @@
   --space-10: 2.5rem;   /* 40px */
   --space-12: 3rem;     /* 48px */
   --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
 
-  /* Contenedores y Layout */
+  /* 8. Contenedores y Layout */
   --container-max: 1200px;
-  --container-narrow: 768px;
-  --header-height: 4rem; /* 64px */
+  --container-narrow: 800px;
+  --header-height: 4.5rem; /* 72px */
 
-  /* Bordes y Esquinas */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
+  /* 9. Bordes y Esquinas */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
   --radius-full: 9999px;
 
-  /* Sombras Suaves */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  /* 10. Sombras Sutiles para Modo Oscuro */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 25px -5px rgba(255, 90, 0, 0.2);
 
-  /* Transiciones */
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
+  /* 11. Transiciones con Respeto a Preferencias */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }

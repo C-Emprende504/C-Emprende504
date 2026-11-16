@@ -1,0 +1,99 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+---
+
+<section class="section overview-section" aria-labelledby="overview-heading">
+  <div class="container">
+    <SectionHeading
+      id="overview-heading"
+      tag="Arquitectura & Propósito"
+      title="¿Cómo funciona el ecosistema C-Emprende504?"
+      description="Una plataforma central diseñada bajo principios de independencia, rendimiento técnico y transparencia comercial."
+    />
+
+    <div class="pillars-grid" role="list">
+      <div class="pillar-card" role="listitem">
+        <div class="pillar-number">01</div>
+        <h3 class="pillar-title">Hubs Especializados por Nicho</h3>
+        <p class="pillar-description">
+          En lugar de un catálogo genérico saturado, cada vertical de mercado validada contará con su propio micrositio independiente, optimizado con diseño y contenidos adaptados a su público.
+        </p>
+      </div>
+
+      <div class="pillar-card" role="listitem">
+        <div class="pillar-number">02</div>
+        <h3 class="pillar-title">Infraestructura Jamstack & Cero Coste</h3>
+        <p class="pillar-description">
+          Desarrollado sobre Astro y Cloudflare Pages para generar páginas estáticas ultrarrápidas, accesibles y resistentes a picos de tráfico, sin incurrir en costes de servidores recurrentes.
+        </p>
+      </div>
+
+      <div class="pillar-card" role="listitem">
+        <div class="pillar-number">03</div>
+        <h3 class="pillar-title">Curaduría y Ética de Afiliación</h3>
+        <p class="pillar-description">
+          Evaluación rigurosa de infoproductos alojados en Hotmart: solo se promoverán programas con garantías oficiales comprobables, reputación positiva y soporte directo del productor.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .overview-section {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .pillars-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  .pillar-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .pillar-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+  }
+
+  .pillar-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    line-height: 1;
+  }
+
+  .pillar-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+  }
+
+  .pillar-description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 0;
+  }
+</style>

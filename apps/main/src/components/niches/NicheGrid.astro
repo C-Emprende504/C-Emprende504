@@ -1,0 +1,89 @@
+---
+import { NICHES_DATA } from '../../data/niches';
+import NicheCard from './NicheCard.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+---
+
+<section class="section niches-section" id="nichos" aria-labelledby="nichos-heading">
+  <div class="container">
+    <SectionHeading
+      id="nichos-heading"
+      tag="Catálogo de Oportunidades"
+      title="Explora nuestros nichos"
+      description="Categorías verticales identificadas para la futura apertura de micrositios especializados. Cada área representa un ecosistema en fase de investigación y preparación."
+    />
+
+    <div class="niches-grid" role="list" aria-label="Listado de categorías de nicho">
+      {
+        NICHES_DATA.map((niche) => (
+          <div role="listitem">
+            <NicheCard niche={niche} />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="niches-note">
+      <p class="note-text">
+        <strong>Nota de Transparencia:</strong> Los nichos mostrados representan áreas en evaluación técnica. La publicación de cada micrositio se efectuará de forma independiente tras validar la calidad de la oferta formativa y la disponibilidad de infoproductos autorizados.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .niches-section {
+    background-color: var(--color-bg);
+    position: relative;
+  }
+
+  /* Cuadrícula adaptativa y responsiva */
+  .niches-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Tablets (desde 640px / 768px) */
+  @media (min-width: 640px) {
+    .niches-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  /* Escritorio estándar (desde 1024px) */
+  @media (min-width: 1024px) {
+    .niches-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  /* Pantallas amplias (desde 1280px) */
+  @media (min-width: 1280px) {
+    .niches-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+  }
+
+  .niches-note {
+    margin-top: var(--space-10);
+    padding: var(--space-4) var(--space-6);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    max-width: var(--container-narrow);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .note-text {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 0;
+  }
+</style>

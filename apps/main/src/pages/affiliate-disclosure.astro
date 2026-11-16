@@ -10,11 +10,12 @@ import Button from '../components/ui/Button.astro';
   <div class="section">
     <div class="container container-narrow">
       <article class="content-article">
+        <span class="eyebrow-tag">Transparencia & Cumplimiento</span>
         <h1>Aviso de Afiliación y Transparencia</h1>
-        <p class="last-updated">Última actualización: Noviembre de 2026</p>
+        <p class="last-updated">Última actualización: Noviembre de 2026 (Sprint 3)</p>
 
         <p class="lead">
-          En cumplimiento con las directrices de la Comisión Federal de Comercio (FTC) y los estándares de transparencia en el comercio digital, ponemos a disposición de nuestros usuarios esta declaración sobre el funcionamiento de nuestra plataforma.
+          En cumplimiento con las directrices de la Comisión Federal de Comercio (FTC) y las políticas de transparencia publicitaria, ponemos a disposición de nuestros usuarios esta declaración sobre el funcionamiento del ecosistema.
         </p>
 
         <h2>1. Relación de Afiliación con Hotmart</h2>
@@ -22,7 +23,7 @@ import Button from '../components/ui/Button.astro';
           <strong>C-Emprende504</strong> es una plataforma de divulgación y promoción de infoproductos que participa en el programa de comercializadores afiliados de <strong>Hotmart</strong>.
         </p>
         <p>
-          Esto significa que cuando se publiquen recomendaciones de productos digitales, los enlaces salientes de compra (HotLinks) contendrán identificadores de seguimiento. Si usted decide inscribirse o adquirir un curso a través de dichos enlaces, nosotros podemos recibir una comisión por intermediación comercial <strong>sin ningún costo adicional para usted</strong>. El precio pagado es exactamente el mismo que si adquiriera el producto directamente.
+          Esto significa que cuando se publiquen recomendaciones de productos digitales en futuros micrositios, los enlaces salientes de compra (HotLinks) contendrán identificadores de seguimiento. Si usted decide inscribirse o adquirir un curso a través de dichos enlaces, nosotros podemos recibir una comisión por intermediación comercial <strong>sin ningún costo adicional para usted</strong>. El precio pagado es exactamente el mismo que si adquiriera el producto directamente.
         </p>
 
         <h2>2. Compromiso de Curaduría y Calidad</h2>
@@ -33,7 +34,7 @@ import Button from '../components/ui/Button.astro';
           Sin embargo, los cursos, temarios, soporte técnico y actualizaciones son responsabilidad exclusiva del productor original de cada infoproducto en la plataforma Hotmart.
         </p>
 
-        <h2>3. Garantías de Satisfacción y Devolución</h2>
+        <h2>3. Garantías Oficiales y Reembolsos</h2>
         <p>
           Todos los productos promovidos a través de Hotmart cuentan con un periodo de garantía oficial estipulado por el productor (generalmente entre 7 y 30 días naturales). Si el contenido no cumple con sus expectativas, la gestión de reembolsos se efectúa de manera directa e íntegra a través del centro de soporte oficial de Hotmart.
         </p>
@@ -66,10 +67,28 @@ import Button from '../components/ui/Button.astro';
     }
   }
 
+  .eyebrow-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+  }
+
+  h1 {
+    margin-bottom: var(--space-2);
+  }
+
   .last-updated {
     font-size: var(--text-xs);
     color: var(--color-text-subtle);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -77,15 +96,19 @@ import Button from '../components/ui/Button.astro';
   .lead {
     font-size: var(--text-lg);
     color: var(--color-text);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
   }
 
   h2 {
     margin-top: var(--space-8);
     margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
   }
 
   .cta-wrapper {
     margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
   }
 </style>

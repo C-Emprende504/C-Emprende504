@@ -10,8 +10,9 @@ import Button from '../components/ui/Button.astro';
   <div class="section">
     <div class="container container-narrow">
       <article class="content-article">
+        <span class="eyebrow-tag">Marco Normativo</span>
         <h1>Política de Privacidad</h1>
-        <p class="last-updated">Última actualización: Noviembre de 2026</p>
+        <p class="last-updated">Última actualización: Noviembre de 2026 (Sprint 3)</p>
 
         <p class="lead">
           En <strong>C-Emprende504</strong> la protección de la privacidad y los datos de nuestros visitantes es una prioridad estructural. Esta política describe cómo se gestiona la información en nuestra plataforma.
@@ -19,16 +20,16 @@ import Button from '../components/ui/Button.astro';
 
         <h2>1. Información que Recopilamos</h2>
         <p>
-          En la fase técnica actual (Sprint 1), este sitio web opera como un conjunto de documentos estáticos servidos a través de la infraestructura de Cloudflare Pages.
+          En la fase técnica actual, este sitio web opera como un conjunto de documentos estáticos servidos a través de la infraestructura global de Cloudflare Pages.
         </p>
-        <ul>
-          <li><strong>Datos Personales:</strong> No recopilamos nombres, correos electrónicos, números telefónicos ni información financiera en esta etapa.</li>
+        <ul class="policy-list">
+          <li><strong>Datos Personales:</strong> No recopilamos nombres, correos electrónicos, números telefónicos ni información financiera en esta etapa. No existen formularios de captación activos.</li>
           <li><strong>Datos de Navegación Técnica:</strong> Los servidores perimetrales de Cloudflare pueden registrar direcciones IP y datos de solicitud estrictamente necesarios para la entrega del contenido y mitigación de ataques cibernéticos (DDoS), sin fines de elaboración de perfiles comerciales.</li>
         </ul>
 
         <h2>2. Enlaces a Sitios de Terceros (Hotmart)</h2>
         <p>
-          En fases posteriores, la plataforma incluirá enlaces autorizados a productos digitales alojados en la plataforma <strong>Hotmart</strong>. Al hacer clic en dichos enlaces y ser redirigido al checkout oficial de Hotmart, cualquier dato personal o de facturación proporcionado será gestionado directamente por Hotmart bajo sus propios términos de servicio y políticas de privacidad.
+          En fases posteriores, los micrositios incluirán enlaces autorizados a productos digitales alojados en la plataforma <strong>Hotmart</strong>. Al hacer clic en dichos enlaces y ser redirigido al checkout oficial de Hotmart, cualquier dato personal o de facturación proporcionado será gestionado directamente por Hotmart bajo sus propios términos de servicio y políticas de privacidad.
         </p>
         <p>
           C-Emprende504 nunca recopilará ni almacenará información de tarjetas de crédito o credenciales de pago.
@@ -67,10 +68,28 @@ import Button from '../components/ui/Button.astro';
     }
   }
 
+  .eyebrow-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary-border);
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-4);
+  }
+
+  h1 {
+    margin-bottom: var(--space-2);
+  }
+
   .last-updated {
     font-size: var(--text-xs);
     color: var(--color-text-subtle);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -78,15 +97,29 @@ import Button from '../components/ui/Button.astro';
   .lead {
     font-size: var(--text-lg);
     color: var(--color-text);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
   }
 
   h2 {
     margin-top: var(--space-8);
     margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+  }
+
+  .policy-list {
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-6);
+  }
+
+  .policy-list li {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-muted);
   }
 
   .cta-wrapper {
     margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
   }
 </style>
