@@ -3,7 +3,7 @@
 **Rol:** Senior Software Architect & Frontend Lead  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.2.0 (Sprint 3 — Entorno Visual Local & Pruebas)  
+**Versión:** 1.2.1 (Sprint 3.1 — Consistencia Comercial & Estado de Nichos)  
 
 ---
 
@@ -69,7 +69,7 @@ Para validar el sitio, el desarrollador debe diferenciar claramente entre **prue
 2. **Inspección de las Diez Tarjetas:**
    - Comprobar que se renderizan exactamente las 10 categorías definidas en `src/data/niches.ts`.
    - Verificar que los iconos vectoriales SVG se visualicen con nitidez y acento naranja.
-   - Comprobar que los badges reflejen el estado (*"En Planificación"* o *"En Preparación"*).
+   - Comprobar que todas las 10 tarjetas exhiban uniformemente el badge *"En Planificación"* (sin nichos marcados como activos ni en preparación).
    - Verificar que no existan enlaces rotos a productos ni precios inventados.
 3. **Prueba de Adaptabilidad Responsive (DevTools):**
    - **Móvil Pequeño (320px - 375px):** Comprobar que no hay desbordamiento horizontal (`overflow-x`), los textos se leen cómodamente y el menú hamburguesa abre y cierra correctamente.

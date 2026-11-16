@@ -18,15 +18,16 @@ La plataforma permite gobernar desde un único repositorio un **sitio principal*
 
 ---
 
-## 2. Estado Actual del Proyecto (Sprint 3 Completado)
+## 2. Estado Actual del Proyecto (Sprint 3.1 Completado)
 
 > [!TIP]
-> **Fase Actual: Sprint 3 — Diseño Visual & Experiencia de Usuario**  
-> Se implementó la primera versión visual navegable del portal principal en `apps/main/`. El diseño adopta una estética en **modo oscuro (#0B0B0B)** con tarjetas en tonos grises profundos (`#141414`), bordes sutiles (`#292929`), **acentos naranjas (#FF5A00)**, iconos vectoriales representativos y la cuadrícula interactiva de los **10 nichos potenciales en preparación**.
+> **Fase Actual: Sprint 3.1 — Consistencia Comercial & Revisión Visual**  
+> Se perfeccionó la consistencia comercial del portal principal en `apps/main/`. Las **10 categorías de nichos potenciales** se homologaron uniformemente al estado **"En Planificación"** (`planning`), garantizando que ninguna vertical se exhiba erróneamente como seleccionada o activa antes de su validación formal. Se eliminaron métricas técnicas o porcentajes no respaldados del hero principal, consolidando un mensaje transparente y profesional alineado a la fase de estudio de mercado.
 
 - **Estructura del Proyecto:** Monorepo con npm workspaces (`apps/*`, `packages/*`).
-- **Diseño Visual:** Dark Theme accesible (WCAG 2.1 AA) con tokens CSS configurables.
-- **Catálogo de Nichos:** 10 categorías centralizadas en `src/data/niches.ts` con estado visual de planificación.
+- **Diseño Visual:** Dark Theme accesible (WCAG 2.1 AA) con tokens CSS configurables (#0B0B0B, #141414, #FF5A00).
+- **Catálogo de Nichos:** 10 categorías centralizadas en `src/data/niches.ts` con estado unificado "En Planificación" (sin nicho piloto preseleccionado).
+- **Hero & Mensajería:** Mensajes orientados a la arquitectura del portal, sin vanity stats ni afirmaciones de ventas operando.
 - **Diagnósticos de Código:** `npm run check` pasando con 0 errores, 0 advertencias y 0 hints.
 - **Compilación Estática:** `npm run build` genera exitosamente 5 páginas estáticas en `apps/main/dist/`.
 

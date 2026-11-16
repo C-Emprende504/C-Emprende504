@@ -3,8 +3,8 @@
 **Rol:** Senior Software Architect & Technical Lead  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.0.0 (Sprint 2 — Arquitectura Multi-Sitio)  
-**Estado:** Estrategia Aprobada e Implementada  
+**Versión:** 1.1.0 (Sprint 3.1 — Consistencia Comercial & Estado de Nichos)  
+**Estado:** Estrategia Aprobada — Todos los Nichos en Planificación  
 
 ---
 
@@ -90,7 +90,8 @@ Durante la fase de planificación estratégica se identificaron **10 categorías
 | **10** | **Espiritualidad** | Mindfulness, meditación, yoga y crecimiento interior. |
 
 > [!IMPORTANT]
-> **Criterio de Validación Previa:** Estas categorías representan hipótesis y oportunidades de mercado, **NO decisiones comerciales definitivas**.  
+> **Criterio de Validación Previa y Estado de Nichos:**  
+> En el Sprint 3.1 se homologó el estado de las **diez categorías a "En Planificación"** (`planning`). Ninguna categoría se encuentra en preparación activa ni ha sido seleccionada como nicho piloto. Estas categorías representan hipótesis y oportunidades de mercado, **NO decisiones comerciales definitivas**.  
 > **No se creará ningún micrositio** para estas categorías hasta que se cumplan las 4 condiciones de viabilidad:
 > 1. Verificación de demanda real y volumen de búsqueda en la audiencia objetivo.
 > 2. Existencia en Hotmart de infoproductos de probada satisfacción (calificación alta, bajo ratio de reembolso y garantía oficial transparente).
@@ -207,7 +208,7 @@ En el Sprint 2 se flexibilizó el esquema de colecciones de contenido (`src/cont
 ### Decisiones Pendientes (Requieren Aprobación del PM):
 1. Adquisición del dominio comercial oficial y definición de los subdominios iniciales.
 2. Selección del primer producto digital de Hotmart con su respectivo HotLink autorizado.
-3. Definición del primer nicho vertical a evaluar tras la consolidación del sitio principal.
+3. Selección y aprobación formal del nicho piloto por parte del Project Manager (actualmente los 10 nichos permanecen estrictamente en estado "En Planificación" sin piloto asignado).
 
 ### Restricciones Vigentes:
 - NO crear directorios para los nichos potenciales hasta su validación formal.

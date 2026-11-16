@@ -3,8 +3,8 @@
 **Rol:** Senior Software Architect & UI/UX Specialist  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.3.0 (Sprint 3 — Diseño Visual & Experiencia de Usuario)  
-**Estado:** Arquitectura Visual y Monorepo Implementada  
+**Versión:** 1.3.1 (Sprint 3.1 — Consistencia Comercial & Estado de Nichos)  
+**Estado:** Arquitectura Visual y Consistencia de Planificación Implementada  
 
 ---
 
@@ -52,7 +52,7 @@ flowchart TD
 2. **Estética Profesional Dark Theme:** Fondo oscuro (`#0B0B0B`), tarjetas con superficies sobrias (`#141414`), bordes sutiles (`#292929`) y acentos naranja (`#FF5A00`).
 3. **Desacoplamiento Estricto:** La información de los 10 nichos potenciales reside en una estructura de datos tipada centralizada (`src/data/niches.ts`), evitando duplicación en los componentes.
 4. **Mobile-First & Accesibilidad:** Diseñado y optimizado para pantallas desde 320px de ancho bajo pautas **WCAG 2.1 Nivel AA**, con ratios de contraste superiores a 7:1 y respeto por `prefers-reduced-motion`.
-5. **Sin Falsas Afirmaciones:** Interfaz atractiva y profesional que refleja con honestidad el estado en preparación de los nichos, sin simular tiendas, valoraciones inventadas ni enlaces rotos.
+5. **Sin Falsas Afirmaciones:** Interfaz atractiva y profesional que refleja con honestidad el estado en planificación de los diez nichos, sin simular tiendas, valoraciones inventadas, métricas infundadas ni enlaces rotos.
 
 ---
 
@@ -94,7 +94,7 @@ apps/main/src/components/
 │   ├── NicheCard.astro           # Tarjeta individual de nicho con icono SVG, tag de orden (#01..#10), descripción y badge de estado.
 │   └── NicheGrid.astro           # Cuadrícula responsiva que consume NICHES_DATA y distribuye las 10 categorías.
 └── home/
-    ├── HeroSection.astro         # Hero principal con resplandor naranja, titular persuasivo neutral, CTAs y métricas transparentes.
+    ├── HeroSection.astro         # Hero principal con resplandor naranja, titular persuasivo neutral y CTAs directos (sin métricas infundadas).
     └── PlatformOverview.astro    # Sección explicativa de los 3 pilares del ecosistema C-Emprende504.
 ```
 
@@ -117,9 +117,9 @@ export interface NicheCategory {
 ```
 
 ### Reglas de Presentación:
-- **Estado de Disponibilidad:** Las tarjetas muestran visualmente si se encuentran `En Planificación` o `En Preparación`.
+- **Estado Homogéneo:** En el Sprint 3.1, las 10 tarjetas muestran de forma unificada el estado `En Planificación` (`planning`). No hay categorías en preparación ni piloto seleccionado.
 - **Cero Enlaces Rotos:** No se generan enlaces hacia micrositios que todavía no existen; en su lugar, se incluye el indicador neutral *"Próximo Hub"*.
-- **Preparación Futura:** Cuando un micrositio sea creado en `apps/[nicho]`, bastará con asignar la URL correspondiente en el objeto de datos para activar la tarjeta.
+- **Preparación Futura:** Cuando un micrositio sea formalmente aprobado y creado en `apps/[nicho]`, se actualizará el estado y URL correspondiente en el objeto de datos para activar la tarjeta.
 
 ---
 
