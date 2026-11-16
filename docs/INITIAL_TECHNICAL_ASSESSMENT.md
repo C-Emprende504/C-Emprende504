@@ -3,14 +3,15 @@
 **Rol:** Senior Software Architect & Technical Project Analyst  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.0.0  
-**Estado:** Documento de Evaluación Técnica Preliminar  
+**Versión:** 1.1.0 (Sprint 1 Ejecutado)  
+**Estado:** Evaluación Base Completada y Cimientos Astro Inicializados  
 
 ---
 
 ## 1. Resultados de la Inspección del Entorno de Trabajo (Workspace Inspection)
 
-Se realizó una inspección exhaustiva del entorno local asignado al proyecto. A continuación se presentan los hallazgos técnicos registrados:
+### 1.1. Estado Inicial (Sprint 0 - Inspección Previa)
+Se realizó una inspección exhaustiva del entorno local asignado al proyecto:
 
 ```text
 Inspección ejecutada en: ~/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504
@@ -18,15 +19,21 @@ Ruta absoluta: /home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosA
 Sistema Operativo: Linux x86_64
 ```
 
-| Parámetro Evaluado | Estado Actual | Observación Técnica |
+| Parámetro Evaluado | Estado Inicial (Sprint 0) | Observación Técnica |
 | :--- | :--- | :--- |
-| **Contenido del Directorio** | Vacío (`.` y `..` únicamente) | El espacio de trabajo está completamente limpio. No existen archivos preexistentes ni código residual. |
-| **Control de Versiones (Git)** | **No Inicializado** (`fatal: not a git repository`) | No se detectó directorio `.git` ni configuración de repositorio. En estricto cumplimiento de las restricciones de la Fase 0, **no se inicializó Git** de forma prematura. |
-| **Motor de Git del Sistema** | Instalado (`git version 2.43.0` en `/usr/bin/git`) | Listo para ser inicializado en cuanto el Project Manager otorgue aprobación. |
-| **Runtime de Node.js** | Instalado (`v24.19.0` gestionado vía NVM) | Versión moderna y estable, plenamente compatible con cualquier generador estático actual (Astro, Vite, etc.). |
-| **Gestor de Paquetes (npm)** | Instalado (`11.17.0`) | Disponible en el path del sistema para la gestión de dependencias en caso de requerirse tooling. |
-| **Python** | Instalado (`python3` en `/usr/bin/python3`) | Disponible en el sistema operativo para scripts auxiliares si fuera necesario. |
-| **Archivos de Configuración** | Inexistentes | No hay archivos `.gitignore`, `package.json`, ni variables de entorno creadas. |
+| **Contenido del Directorio** | Vacío (`.` y `..` únicamente) | El espacio de trabajo estaba completamente limpio. |
+| **Control de Versiones (Git)** | **No Inicializado** | No existía directorio `.git` preexistente. |
+| **Motor de Git del Sistema** | Instalado (`git version 2.43.0` en `/usr/bin/git`) | Verificado y funcional. |
+| **Runtime de Node.js** | Instalado (`v24.19.0` gestionado vía NVM) | Versión moderna y estable. |
+| **Gestor de Paquetes (npm)** | Instalado (`11.17.0`) | Disponible en el path del sistema. |
+| **Python** | Instalado (`python3` en `/usr/bin/python3`) | Disponible en el sistema operativo. |
+
+### 1.2. Estado Actualizado tras la Inicialización (Sprint 1)
+- **Control de Versiones:** Repositorio Git inicializado exitosamente en rama `main` con reglas `.gitignore` completas y commit raíz inicial convencional.
+- **Motor SSG:** Astro `v7.4.12` instalado y configurado con salida estática inmutable (`output: 'static'`).
+- **Colección de Contenidos:** Esquema tipado Zod en `src/content.config.ts` para `products` con 0 productos registrados (catálogo limpio).
+- **Herramientas de Diagnóstico:** `@astrojs/check` y `typescript` instalados como devDependencies (`npm run check` pasando con 0 errores, 0 advertencias, 0 hints).
+- **Compilación Estática:** `npm run build` genera exitosamente las 5 rutas estáticas (`/`, `/about`, `/contact`, `/privacy`, `/affiliate-disclosure`) en `dist/` en 1.6 segundos.
 
 ---
 

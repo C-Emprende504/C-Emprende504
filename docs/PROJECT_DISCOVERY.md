@@ -3,8 +3,8 @@
 **Rol:** Senior Business Analyst & Software Architect  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.0.0 (Descubrimiento Inicial)  
-**Estado:** Pendiente de Aprobación del Project Manager  
+**Versión:** 1.1.0 (Descubrimiento Aprobado & Sprint 1 en Ejecución)  
+**Estado:** Arquitectura Astro Aprobada por el Project Manager  
 
 ---
 
@@ -312,12 +312,18 @@ C-Emprende504/
 Se elevan a consideración y aprobación del Project Manager (ChatGPT) los siguientes 5 puntos críticos antes de iniciar la Fase 1:
 
 1. **Aprobación de la Alternativa Tecnológica:**  
-   *¿Se aprueba el uso de un generador estático ultra liviano (Astro / Vite con HTML5/CSS modular) enfocado en Zero-JS y máxima velocidad en Cloudflare Pages, descartando frameworks pesados con backend?*
+   *¿Se aprueba el uso de un generador estático ultra liviano (Astro / Vite con HTML5/CSS modular) enfocado en Zero-JS y máxima velocidad en Cloudflare Pages, descartando frameworks pesados con backend?*  
+   **Resolución en Sprint 1:** **Aprobado Astro con salida estática (SSG)**, sin backend, sin frameworks React/Vue y compatible con Cloudflare Pages.
 2. **Autorización para Inicializar el Control de Versiones:**  
-   *¿Se autoriza la ejecución de `git init`, la creación del `.gitignore` adecuado y la preparación para la conexión con el repositorio remoto de GitHub?*
+   *¿Se autoriza la ejecución de `git init`, la creación del `.gitignore` adecuado y la preparación para la conexión con el repositorio remoto de GitHub?*  
+   **Resolución en Sprint 1:** **Aprobado y ejecutado.** Git inicializado en rama `main` con `.gitignore` exhaustivo y primer commit de documentación base.
 3. **Estructura Definitiva del Esquema de Datos de Productos:**  
-   *¿Se valida la propuesta de mantener el catálogo de productos centralizado en ficheros JSON/Markdown locales para facilitar su administración sin base de datos?*
+   *¿Se valida la propuesta de mantener el catálogo de productos centralizado en ficheros JSON/Markdown locales para facilitar su administración sin base de datos?*  
+   **Resolución en Sprint 1:** **Aprobado y ejecutado.** Implementada colección tipada `products` en `src/content.config.ts` (con 0 productos reales o ficticios).
 4. **Definición de los Primeros Productos de Hotmart a Promocionar:**  
-   *¿Cuáles serán los productos seleccionados como piloto para construir la primera landing page real con sus respectivos HotLinks autorizados?*
+   *¿Cuáles serán los productos seleccionados como piloto para construir la primera landing page real con sus respectivos HotLinks autorizados?*  
+   **Resolución en Sprint 1:** **Pendiente para futuros sprints.** No se han seleccionado productos de Hotmart ni creado enlaces.
 5. **Estrategia Inicial de Campaña y Tracking:**  
-   *¿Se integrará Meta Pixel y Google Analytics desde la Fase 1 o se desplegará primero la plataforma base y páginas legales antes de inyectar scripts de terceros?*
+   *¿Se integrará Meta Pixel y Google Analytics desde la Fase 1 o se desplegará primero la plataforma base y páginas legales antes de inyectar scripts de terceros?*  
+   **Resolución en Sprint 1:** **Aprobado diferir scripts externos.** Sprint 1 se enfoca exclusivamente en cimientos de interfaz y páginas estructurales sin tracking publicitario ni cookies.
+
