@@ -1,5 +1,6 @@
 # Node.js dependencies
 node_modules/
+**/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -7,10 +8,13 @@ pnpm-debug.log*
 
 # Build outputs
 dist/
+**/dist/
 build/
+**/build/
 
 # Astro cache and generated types
 .astro/
+**/.astro/
 
 # Environment variables
 .env
@@ -18,6 +22,8 @@ build/
 .env.development
 .env.local
 .env.*.local
+**/.env
+**/.env.*
 
 # Operating System temporary files
 .DS_Store
@@ -37,4 +43,6 @@ Thumbs.db
 
 # Cloudflare Pages / Wrangler temporary files
 .wrangler/
+**/.wrangler/
 .mf/
+**/.mf/

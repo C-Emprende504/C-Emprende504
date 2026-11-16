@@ -1,21 +1,16 @@
 {
-  "name": "c-emprende504",
+  "name": "c-emprende504-monorepo",
   "version": "0.1.0",
-  "type": "module",
-  "description": "Plataforma de marketing de afiliados para productos digitales en Hotmart",
+  "private": true,
+  "description": "Monorepo para el sitio principal y futuros micrositios de C-Emprende504",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check"
-  },
-  "dependencies": {
-    "astro": "^7.4.12"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.12",
-    "typescript": "^6.0.3"
-  },
-  "author": "C-Emprende504",
-  "license": "UNLICENSED"
+    "dev": "npm run dev --workspace=@c-emprende504/main",
+    "build": "npm run build --workspace=@c-emprende504/main",
+    "preview": "npm run preview --workspace=@c-emprende504/main",
+    "check": "npm run check --workspace=@c-emprende504/main"
+  }
 }
