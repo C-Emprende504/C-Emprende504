@@ -30,24 +30,6 @@ import Button from '../ui/Button.astro';
           Acerca de la Plataforma
         </Button>
       </div>
-
-      <!-- Métricas / Atributos Técnicos Transparentes -->
-      <div class="hero-features" role="list">
-        <div class="feature-item" role="listitem">
-          <span class="feature-value">10</span>
-          <span class="feature-label">Nichos en Planificación</span>
-        </div>
-        <div class="feature-divider" aria-hidden="true"></div>
-        <div class="feature-item" role="listitem">
-          <span class="feature-value">100%</span>
-          <span class="feature-label">Arquitectura Jamstack</span>
-        </div>
-        <div class="feature-divider" aria-hidden="true"></div>
-        <div class="feature-item" role="listitem">
-          <span class="feature-value">SSG</span>
-          <span class="feature-label">Velocidad Móvil Óptima</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -171,50 +153,6 @@ import Button from '../ui/Button.astro';
     align-items: center;
     gap: var(--space-4);
     flex-wrap: wrap;
-    margin-bottom: var(--space-12);
-  }
-
-  .hero-features {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-6);
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--color-border);
-    flex-wrap: wrap;
-  }
-
-  .feature-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-1);
-  }
-
-  .feature-value {
-    font-family: var(--font-mono);
-    font-size: var(--text-xl);
-    font-weight: 800;
-    color: var(--color-text);
-  }
-
-  .feature-label {
-    font-size: var(--text-xs);
-    color: var(--color-text-subtle);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .feature-divider {
-    width: 1px;
-    height: 32px;
-    background-color: var(--color-border);
-    display: none;
-  }
-
-  @media (min-width: 640px) {
-    .feature-divider {
-      display: block;
-    }
+    margin-bottom: 0;
   }
 </style>

@@ -1,7 +1,7 @@
 /**
  * C-Emprende504 — Estructura Centralizada de Categorías de Nicho
  * Contiene la definición tipada de los 10 nichos potenciales identificados durante la planificación.
- * NOTA: Representan oportunidades preliminares en preparación, NO tiendas ni productos comerciales activos.
+ * NOTA: Todas las categorías representan oportunidades preliminares en planificación, NO tiendas ni productos comerciales activos.
  */
 
 export interface NicheCategory {
@@ -61,8 +61,8 @@ export const NICHES_DATA: NicheCategory[] = [
     name: 'Marketing Digital',
     shortDescription:
       'Estrategias de comunicación digital, pauta publicitaria, copywriting y posicionamiento orgánico.',
-    status: 'preparation',
-    statusLabel: 'En Preparación',
+    status: 'planning',
+    statusLabel: 'En Planificación',
     iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>`,
   },
   {
@@ -71,8 +71,8 @@ export const NICHES_DATA: NicheCategory[] = [
     name: 'Inteligencia Artificial',
     shortDescription:
       'Adopción de herramientas de IA generativa, optimización de flujos productivos y automatización.',
-    status: 'preparation',
-    statusLabel: 'En Preparación',
+    status: 'planning',
+    statusLabel: 'En Planificación',
     iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 9h6v6H9z"/><path d="M15 2v1"/><path d="M9 2v1"/><path d="M2 15h1"/><path d="M2 9h1"/><path d="M21 15h1"/><path d="M21 9h1"/><path d="M15 21v1"/><path d="M9 21v1"/></svg>`,
   },
   {
