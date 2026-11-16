@@ -144,4 +144,18 @@ El equipo se adhiere estrictamente a las diez reglas fundamentales de ingenierí
 
 ---
 
+cat <<'EOF' >> README.md
+
+## Estado de publicación
+
+- Repositorio: GitHub.
+- Arquitectura: Astro con generación estática (SSG).
+- Aplicación principal: `apps/main/`.
+- Directorio de publicación: `apps/main/dist/`.
+- Plataforma de despliegue prevista: Cloudflare Pages.
+- Estado: configuración de despliegue pendiente de validación.
+EOF
+
+
+
 *C-Emprende504 — Arquitectura de Marketing de Afiliados de Alto Rendimiento.*
