@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Acerca del Proyecto"
+  description="Información técnica y estructural sobre la arquitectura de la plataforma C-Emprende504."
+>
+  <div class="section">
+    <div class="container container-narrow">
+      <article class="content-article">
+        <h1>Acerca de C-Emprende504</h1>
+        <p class="lead">
+          C-Emprende504 es un proyecto de arquitectura web concebido para la promoción curada y ética de productos educativos digitales a través de la infraestructura de afiliados de Hotmart.
+        </p>
+
+        <h2>1. Principios Técnicos Fundamentales</h2>
+        <p>
+          La arquitectura del sitio sigue rigurosamente diez directrices de ingeniería establecidas en la fase de descubrimiento:
+        </p>
+        <ul>
+          <li><strong>Salida Estática Pura (SSG):</strong> Compilación completa de HTML en tiempo de construcción, eliminando la necesidad de servidores Node.js activos en producción.</li>
+          <li><strong>Cero Coste Recurrente:</strong> Alojar y distribuir la aplicación a través de la red global Anycast de Cloudflare Pages sin incurrir en costes de infraestructura fijos.</li>
+          <li><strong>Desacoplamiento de Datos:</strong> El catálogo de productos se gestionará mediante colecciones de contenido tipadas, separando completamente los datos del diseño visual.</li>
+          <li><strong>Enfoque Mobile-First:</strong> Priorización absoluta de la experiencia y velocidad de carga en dispositivos móviles con conexiones celulares 3G/4G.</li>
+          <li><strong>Cumplimiento Normativo:</strong> Transparencia total de afiliación y respeto a las políticas de privacidad y directrices publicitarias.</li>
+        </ul>
+
+        <h2>2. Estado del Desarrollo</h2>
+        <p>
+          Actualmente el proyecto se encuentra en <strong>Sprint 1 (Cimientos de Infraestructura)</strong> bajo la supervisión del Project Manager (ChatGPT). En esta etapa se ha inicializado el repositorio de código, el sistema tipado de colecciones de contenido y la biblioteca de componentes reutilizables.
+        </p>
+        <p>
+          No se han incorporado productos comerciales ni campañas promocionales hasta que el modelo y catálogo sean aprobados por la dirección del proyecto.
+        </p>
+
+        <div class="cta-wrapper">
+          <Button href="/" variant="primary">Volver al Inicio</Button>
+          <Button href="/affiliate-disclosure" variant="outline">Consultar Aviso de Afiliación</Button>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-article {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .content-article {
+      padding: var(--space-10);
+    }
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+
+  .cta-wrapper {
+    margin-top: var(--space-8);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+</style>

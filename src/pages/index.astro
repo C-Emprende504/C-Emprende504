@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Entorno de Desarrollo"
+  description="Plataforma C-Emprende504 en fase de construcción de cimientos e infraestructura."
+>
+  <div class="section">
+    <div class="container container-narrow">
+      <div class="status-card">
+        <span class="badge badge-info">Fase 1 — Cimientos de Infraestructura</span>
+        <h1 class="hero-title">C-Emprende504</h1>
+        <p class="hero-subtitle">
+          Entorno de desarrollo técnico para plataforma de marketing de afiliados basada en Astro y Cloudflare Pages.
+        </p>
+
+        <div class="tech-box">
+          <h2 class="tech-title">Estado de la Arquitectura Base</h2>
+          <ul class="tech-list">
+            <li>
+              <strong>Motor Estático:</strong> Astro (Static Site Generation con compilación HTML pura).
+            </li>
+            <li>
+              <strong>Colección de Contenidos:</strong> Esquema tipado <code>products</code> configurado (0 productos en catálogo).
+            </li>
+            <li>
+              <strong>Diseño & Estilos:</strong> Sistema modular CSS con variables, diseño adaptativo mobile-first y estándares WCAG AA.
+            </li>
+            <li>
+              <strong>Despliegue de Destino:</strong> Preparado para Cloudflare Pages (Free Tier, costo operativo de $0.00/mes).
+            </li>
+            <li>
+              <strong>Estado Comercial:</strong> Sin productos seleccionados, sin enlaces de afiliado y sin claims publicitarios.
+            </li>
+          </ul>
+        </div>
+
+        <div class="actions-group">
+          <Button href="/about" variant="primary">
+            Acerca de la Arquitectura
+          </Button>
+          <Button href="/affiliate-disclosure" variant="outline">
+            Aviso de Afiliación
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .status-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .status-card {
+      padding: var(--space-10);
+    }
+  }
+
+  .hero-title {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .tech-box {
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+
+  .tech-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+  }
+
+  .tech-list {
+    margin-bottom: 0;
+    padding-left: var(--space-5);
+  }
+
+  .tech-list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .tech-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    background-color: var(--color-surface);
+    padding: 0.125rem var(--space-1);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .actions-group {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+</style>

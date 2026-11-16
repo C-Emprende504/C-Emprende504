@@ -1,0 +1,48 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  class: className = '',
+  id,
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+const variantClass = `btn-${variant}`;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      id={id}
+      class={`btn ${variantClass} ${className}`.trim()}
+      target={target}
+      rel={rel}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      id={id}
+      class={`btn ${variantClass} ${className}`.trim()}
+      {...rest}
+    >
+      <slot />
+    </button>
+  )
+}

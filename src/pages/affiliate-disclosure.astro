@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Aviso de Afiliación"
+  description="Declaración de transparencia y divulgación sobre el modelo de marketing de afiliados en C-Emprende504."
+>
+  <div class="section">
+    <div class="container container-narrow">
+      <article class="content-article">
+        <h1>Aviso de Afiliación y Transparencia</h1>
+        <p class="last-updated">Última actualización: Noviembre de 2026</p>
+
+        <p class="lead">
+          En cumplimiento con las directrices de la Comisión Federal de Comercio (FTC) y los estándares de transparencia en el comercio digital, ponemos a disposición de nuestros usuarios esta declaración sobre el funcionamiento de nuestra plataforma.
+        </p>
+
+        <h2>1. Relación de Afiliación con Hotmart</h2>
+        <p>
+          <strong>C-Emprende504</strong> es una plataforma de divulgación y promoción de infoproductos que participa en el programa de comercializadores afiliados de <strong>Hotmart</strong>.
+        </p>
+        <p>
+          Esto significa que cuando se publiquen recomendaciones de productos digitales, los enlaces salientes de compra (HotLinks) contendrán identificadores de seguimiento. Si usted decide inscribirse o adquirir un curso a través de dichos enlaces, nosotros podemos recibir una comisión por intermediación comercial <strong>sin ningún costo adicional para usted</strong>. El precio pagado es exactamente el mismo que si adquiriera el producto directamente.
+        </p>
+
+        <h2>2. Compromiso de Curaduría y Calidad</h2>
+        <p>
+          Nuestra misión es presentar únicamente formación digital que cuente con respaldo pedagógico, reputación positiva y garantías de satisfacción claras por parte de sus creadores.
+        </p>
+        <p>
+          Sin embargo, los cursos, temarios, soporte técnico y actualizaciones son responsabilidad exclusiva del productor original de cada infoproducto en la plataforma Hotmart.
+        </p>
+
+        <h2>3. Garantías de Satisfacción y Devolución</h2>
+        <p>
+          Todos los productos promovidos a través de Hotmart cuentan con un periodo de garantía oficial estipulado por el productor (generalmente entre 7 y 30 días naturales). Si el contenido no cumple con sus expectativas, la gestión de reembolsos se efectúa de manera directa e íntegra a través del centro de soporte oficial de Hotmart.
+        </p>
+
+        <h2>4. Deslinde de Responsabilidad Publicitaria</h2>
+        <p>
+          Este sitio web no forma parte de, ni está respaldado, patrocinado o administrado por <em>Meta Platforms, Inc.</em> (Facebook, Instagram), <em>Google LLC</em> o <em>TikTok</em>. Todas las marcas registradas y logotipos comerciales pertenecen a sus respectivos propietarios.
+        </p>
+
+        <div class="cta-wrapper">
+          <Button href="/" variant="primary">Volver al Inicio</Button>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-article {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .content-article {
+      padding: var(--space-10);
+    }
+  }
+
+  .last-updated {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+  }
+
+  h2 {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+
+  .cta-wrapper {
+    margin-top: var(--space-8);
+  }
+</style>

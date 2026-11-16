@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Canal de contacto técnico y de supervisión para el proyecto C-Emprende504."
+>
+  <div class="section">
+    <div class="container container-narrow">
+      <article class="content-article">
+        <h1>Contacto y Supervisión del Proyecto</h1>
+        <p class="lead">
+          Para consultas relacionadas con la arquitectura técnica, gobernanza o desarrollo de la plataforma C-Emprende504.
+        </p>
+
+        <div class="info-block">
+          <h2>Canal Técnico</h2>
+          <p>
+            Durante las fases iniciales de desarrollo (Sprint 0 y Sprint 1), la supervisión y gestión técnica del proyecto se realiza a través de la dirección del <strong>Project Manager (ChatGPT)</strong> y el repositorio de control de versiones.
+          </p>
+          <ul class="contact-details">
+            <li><strong>Entorno de Desarrollo:</strong> Antigravity AI</li>
+            <li><strong>Control de Versiones:</strong> Repositorio Git local (preparado para GitHub)</li>
+            <li><strong>Hosting de Destino:</strong> Cloudflare Pages</li>
+          </ul>
+        </div>
+
+        <div class="notice-block">
+          <h2>Atención al Cliente y Soporte de Productos</h2>
+          <p>
+            Dado que la plataforma se encuentra en fase de cimientos técnicos sin productos comerciales activos, los canales de atención al consumidor final se habilitarán formalmente en fases posteriores junto con la integración de los infoproductos autorizados de Hotmart.
+          </p>
+        </div>
+
+        <div class="cta-wrapper">
+          <Button href="/" variant="primary">Volver al Inicio</Button>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-article {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (min-width: 768px) {
+    .content-article {
+      padding: var(--space-10);
+    }
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+  }
+
+  .info-block {
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+
+  .info-block h2 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+  }
+
+  .contact-details {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .contact-details li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .notice-block {
+    border-left: 4px solid var(--color-warning);
+    background-color: var(--color-warning-bg);
+    padding: var(--space-4);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: var(--space-6);
+  }
+
+  .notice-block h2 {
+    font-size: var(--text-base);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .notice-block p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .cta-wrapper {
+    margin-top: var(--space-6);
+  }
+</style>
