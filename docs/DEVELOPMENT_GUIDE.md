@@ -1,9 +1,9 @@
-# C-Emprende504 — Guía de Desarrollo y Operaciones
+# C-Emprende504 — Guía de Desarrollo y Operaciones Monorepo
 **Proyecto:** C-Emprende504  
 **Rol:** Senior Software Architect & Developer  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.0.0 (Sprint 1)  
+**Versión:** 1.1.0 (Sprint 2 — Monorepo & npm Workspaces)  
 
 ---
 
@@ -16,136 +16,180 @@ Para colaborar en el proyecto se requiere el siguiente entorno de desarrollo:
 
 ---
 
-## 2. Instalación y Puesta en Marcha
+## 2. Inicialización y Gestión de Dependencias (npm Workspaces)
 
-Clonar o acceder al directorio del proyecto y ejecutar la instalación de dependencias:
+El proyecto utiliza **npm workspaces** para centralizar la administración de dependencias de todas las aplicaciones:
 
 ```bash
-# Instalación de dependencias (Astro, TypeScript, @astrojs/check)
+# 1. Instalar todas las dependencias del monorepo desde la raíz
 npm install
 
-# Generación inicial de tipos para colecciones de contenido
-npx astro sync
+# 2. Agregar una dependencia a una aplicación específica (ejemplo: apps/main)
+npm install <paquete> --workspace=@c-emprende504/main
+
+# 3. Agregar una dependencia de desarrollo compartida en la raíz
+npm install -D <herramienta>
 ```
 
 ---
 
 ## 3. Comandos de Desarrollo Disponibles
 
-En `package.json` se han estandarizado los siguientes scripts:
+Los scripts en la raíz del monorepo delegan automáticamente las tareas a la aplicación principal (`@c-emprende504/main`):
 
-| Comando | Función Técnica | Cuándo Utilizarlo |
+| Comando desde la Raíz | Equivalente Interno | Propósito |
 | :--- | :--- | :--- |
-| `npm run dev` | Inicia el servidor de desarrollo local de Astro con recarga rápida (HMR). | Durante el diseño y maquetación de componentes. |
-| `npm run build` | Ejecuta la compilación de producción SSG, generando archivos HTML/CSS estáticos en `dist/`. | Antes de confirmar cambios en Git o desplegar. |
-| `npm run preview` | Levanta un servidor local liviano para inspeccionar los archivos estáticos compilados en `dist/`. | Para verificar el comportamiento idéntico a producción. |
-| `npm run check` | Ejecuta diagnósticos de tipado estricto en archivos `.astro`, `.ts` y esquemas Zod. | En flujos de QA y antes de cada commit. |
+| `npm run dev` | `npm run dev --workspace=@c-emprende504/main` | Inicia el servidor de desarrollo local de `apps/main` con HMR. |
+| `npm run build` | `npm run build --workspace=@c-emprende504/main` | Compila la aplicación principal en `apps/main/dist/`. |
+| `npm run preview` | `npm run preview --workspace=@c-emprende504/main` | Previsualiza localmente el artefacto compilado en `apps/main/dist/`. |
+| `npm run check` | `npm run check --workspace=@c-emprende504/main` | Ejecuta diagnósticos de Astro, TypeScript y esquemas Zod. |
 
----
-
-## 4. Estructura de Directorios del Código Fuente
-
-```text
-C-Emprende504/
-├── docs/                         # Documentación arquitectónica, técnica y de gobernanza
-│   ├── ARCHITECTURE.md
-│   ├── DEVELOPMENT_GUIDE.md
-│   ├── INITIAL_TECHNICAL_ASSESSMENT.md
-│   └── PROJECT_DISCOVERY.md
-├── public/                       # Activos estáticos públicos no procesados por Vite
-│   ├── favicon.svg               # Isotipo SVG del proyecto
-│   ├── _headers                  # Configuración HTTP para Cloudflare Pages (Sprint 2)
-│   └── _redirects                # Reglas de redirección para enlaces limpios (Sprint 2)
-├── src/                          # Código fuente de la aplicación Astro
-│   ├── assets/                   # Activos procesados y optimizados
-│   │   ├── icons/                # Iconos SVG (.gitkeep)
-│   │   └── images/               # Imágenes optimizadas (.gitkeep)
-│   ├── components/               # Componentes modulares reutilizables
-│   │   ├── common/               # Componentes compartidos y SEO
-│   │   ├── layout/               # Header.astro, Footer.astro
-│   │   └── ui/                   # Button.astro y elementos de interfaz
-│   ├── content/                  # Almacén de colecciones de datos
-│   │   └── products/             # Ficheros individuales por producto (.gitkeep)
-│   ├── layouts/                  # Plantillas maestras de página
-│   │   └── BaseLayout.astro      # Layout HTML5 maestro con accesibilidad integrada
-│   ├── pages/                    # Enrutamiento estático basado en archivos
-│   │   ├── index.astro           # Portada neutral de desarrollo
-│   │   ├── about.astro           # Descripción del proyecto
-│   │   ├── contact.astro         # Canales de supervisión y contacto
-│   │   ├── privacy.astro         # Política de privacidad
-│   │   └── affiliate-disclosure.astro # Aviso legal de afiliación
-│   ├── styles/                   # Hojas de estilo globales
-│   │   ├── global.css            # Normalización, reset y clases de utilidad
-│   │   └── variables.css         # Tokens de diseño CSS (colores, fuentes, espaciado)
-│   └── content.config.ts         # Definición del esquema tipado Zod para productos
-├── astro.config.mjs              # Configuración de compilación SSG de Astro
-├── package.json                  # Manifiesto de dependencias y scripts
-├── tsconfig.json                 # Configuración de TypeScript en modo estricto
-└── .gitignore                    # Reglas de exclusión de Git
+Para ejecutar comandos directamente en el directorio de la aplicación:
+```bash
+cd apps/main
+npm run dev
 ```
 
 ---
 
-## 5. Guía para Incorporar un Futuro Producto al Catálogo
+## 4. Estructura de Directorios del Monorepo
 
-Cuando el Project Manager (ChatGPT) apruebe un producto digital oficial de Hotmart con su respectivo HotLink autorizado, se añadirá como un archivo JSON o Markdown dentro de `src/content/products/`.
+```text
+C-Emprende504/
+├── apps/                                 # Aplicaciones independientes
+│   └── main/                             # Sitio principal de C-Emprende504
+│       ├── public/                       # Activos estáticos directos
+│       │   ├── favicon.svg               # Favicon
+│       │   └── media/                    # Multimedia estática
+│       │       ├── downloads/            # Documentos descargables (.gitkeep)
+│       │       └── videos/               # (.gitkeep - Prohibido subir videos pesados)
+│       ├── src/                          # Código fuente de Astro
+│       │   ├── assets/                   # Imágenes e iconos procesados por Astro
+│       │   │   ├── icons/                # (.gitkeep)
+│       │   │   └── images/               # (.gitkeep)
+│       │   ├── components/               # Header, Footer, Button
+│       │   ├── content/                  # Colección tipada products (0 productos)
+│       │   │   └── products/             # (.gitkeep)
+│       │   ├── layouts/                  # BaseLayout.astro
+│       │   ├── pages/                    # index, about, contact, privacy, affiliate-disclosure
+│       │   ├── styles/                   # global.css y variables.css
+│       │   └── content.config.ts         # Esquema Zod con affiliateUrl opcional
+│       ├── astro.config.mjs              # Configuración SSG
+│       ├── package.json                  # @c-emprende504/main
+│       └── tsconfig.json                 # TypeScript estricto
+├── packages/                             # Espacio para futuras bibliotecas compartidas
+│   └── README.md                         # Lineamientos de abstracción (YAGNI)
+├── docs/                                 # Documentación técnica y estratégica
+│   ├── ARCHITECTURE.md
+│   ├── DEVELOPMENT_GUIDE.md
+│   ├── INITIAL_TECHNICAL_ASSESSMENT.md
+│   ├── MULTI_SITE_STRATEGY.md
+│   └── PROJECT_DISCOVERY.md
+├── package.json                          # Configuración raíz de npm workspaces
+├── package-lock.json                     # Lockfile sincronizado del monorepo
+└── .gitignore                            # Exclusiones de Git optimizadas
+```
 
-### Ejemplo de Archivo de Datos (`src/content/products/curso-ejemplo.json`):
+---
+
+## 5. Procedimiento para Agregar un Nuevo Micrositio
+
+Cuando el Project Manager autorice la apertura de un nuevo micrositio vertical (ejemplo: `apps/bienestar`):
+
+1. **Crear el directorio:**
+   ```bash
+   mkdir -p apps/bienestar
+   ```
+2. **Crear su `package.json` propio:**
+   ```json
+   {
+     "name": "@c-emprende504/bienestar",
+     "version": "0.1.0",
+     "type": "module",
+     "private": true,
+     "scripts": {
+       "dev": "astro dev",
+       "build": "astro build",
+       "preview": "astro preview",
+       "check": "astro check"
+     },
+     "dependencies": {
+       "astro": "^7.4.12"
+     },
+     "devDependencies": {
+       "@astrojs/check": "^0.9.12",
+       "typescript": "^6.0.3"
+     }
+   }
+   ```
+3. **Copiar la configuración de `astro.config.mjs` y `tsconfig.json`:**  
+   Garantizando `output: 'static'`.
+4. **Ejecutar `npm install` desde la raíz:**  
+   npm workspaces vinculará automáticamente el nuevo workspace sin duplicar dependencias comunes.
+5. **Añadir el script en el `package.json` raíz:**
+   ```json
+   "build:bienestar": "npm run build --workspace=@c-emprende504/bienestar"
+   ```
+
+---
+
+## 6. Procedimiento para Incorporar un Producto (Borrador vs Publicado)
+
+El esquema tipado permite dos modalidades de ficha técnica en `apps/main/src/content/products/`:
+
+### A. Ficha Técnica en Borrador (`status: "draft"`)
+Permite documentar un infoproducto en evaluación sin disponer aún de un enlace de afiliado autorizado:
 
 ```json
 {
-  "title": "Nombre Oficial del Infoproducto",
-  "slug": "nombre-oficial-infoproducto",
-  "description": "Descripción persuasiva y verificada provista por el productor en Hotmart.",
-  "category": "Emprendimiento Digital",
-  "featuredImage": "/images/products/portada-curso.webp",
+  "title": "Nombre Oficial del Curso",
+  "slug": "nombre-oficial-curso",
+  "description": "Descripción verificada provista por el productor en Hotmart.",
+  "category": "Salud y Bienestar",
+  "status": "draft"
+}
+```
+
+### B. Producto Publicado (`status: "published"`)
+Requiere obligatoriamente un enlace `affiliateUrl` válido para compilar exitosamente:
+
+```json
+{
+  "title": "Nombre Oficial del Curso",
+  "slug": "nombre-oficial-curso",
+  "description": "Descripción verificada provista por el productor en Hotmart.",
+  "category": "Salud y Bienestar",
   "affiliateUrl": "https://go.hotmart.com/A12345678Z?sck=c_emprende504",
-  "benefits": [
-    "Acceso vitalicio a los contenidos en la plataforma Hotmart",
-    "Certificado digital de finalización",
-    "Garantía de satisfacción de 7 días naturales"
-  ],
-  "targetAudience": [
-    "Emprendedores que inician su negocio digital",
-    "Profesionales que buscan monetizar habilidades"
-  ],
+  "benefits": ["Acceso vitalicio", "Garantía oficial de 7 días"],
+  "targetAudience": ["Personas interesadas en bienestar integral"],
   "frequentlyAskedQuestions": [
     {
-      "question": "¿Cómo recibo el acceso al curso?",
-      "answer": "Inmediatamente tras la confirmación de pago en Hotmart, recibirás un correo electrónico con tus credenciales de acceso a la plataforma."
+      "question": "¿Cómo recibo el acceso?",
+      "answer": "Acceso inmediato por correo electrónico tras procesar el pago en Hotmart."
     }
   ],
-  "status": "draft",
+  "status": "published",
   "publishedAt": "2026-11-20T00:00:00Z"
 }
 ```
 
-> [!CAUTION]
-> **Regla de Oro:** Nunca inventar enlaces de afiliado, testimonios ni precios. Todos los datos deben provenir de la ficha oficial del productor en Hotmart.
+---
+
+## 7. Manejo de Recursos Multimedia
+
+1. **Imágenes e Iconos:** Guardar en `apps/[app-name]/src/assets/images/` y `apps/[app-name]/src/assets/icons/`.
+2. **Archivos Descargables:** Guardar en `apps/[app-name]/public/media/downloads/`.
+3. **Videos:** **NO almacenar videos de gran tamaño en el repositorio.** Utilizar enlaces o reproductores embebidos de YouTube no listado, Vimeo o servicios de streaming dedicados.
 
 ---
 
-## 6. Flujo de Trabajo en Git (Git Workflow)
+## 8. Flujo de Trabajo en Git (Git Workflow)
 
-1. **Convención de Mensajes de Commit (Conventional Commits):**
-   - `feat:` Nuevas funcionalidades o páginas.
-   - `fix:` Corrección de errores en código o marcado.
-   - `docs:` Actualización de documentación técnica.
-   - `style:` Ajustes visuales de CSS o diseño que no alteran la lógica.
-   - `refactor:` Reestructuración de código sin alterar comportamiento.
-   - `chore:` Tareas de mantenimiento de tooling o configuración.
-2. **Buenas Prácticas:**
+1. **Convención de Commits (Conventional Commits):**
+   - `chore(monorepo):` Cambios en workspaces o configuración raíz.
+   - `feat(main):` Funcionalidad en el sitio principal.
+   - `feat(nicho):` Funcionalidad en un micrositio específico.
+   - `docs:` Actualización de documentación.
+   - `style:`, `refactor:`, `fix:`
+2. **Control de Calidad Pre-Commit:**
    - Ejecutar siempre `npm run check` y `npm run build` antes de realizar un commit.
-   - Mantener commits atómicos y descriptivos.
-
----
-
-## 7. Requerimientos para el Despliegue en Cloudflare Pages
-
-1. **Conexión:** Se conectará el repositorio GitHub a Cloudflare Pages una vez autorizado el repositorio remoto.
-2. **Configuración de Compilación:**
-   - **Framework:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Variables de Entorno:** `NODE_VERSION: 24` (o versión LTS compatible).
-3. **Caché y Redirecciones:** En el Sprint 2 se incluirán los archivos `public/_headers` y `public/_redirects` para optimizar la seguridad y los enlaces salientes.

@@ -3,92 +3,118 @@
 **Rol:** Senior Software Architect & Astro Developer  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.1.0 (Sprint 1 — Cimientos de Infraestructura)  
-**Estado:** Arquitectura Base Implementada  
+**Versión:** 1.2.0 (Sprint 2 — Arquitectura Monorepo y Escalabilidad Multi-Sitio)  
+**Estado:** Arquitectura Monorepo Implementada  
 
 ---
 
 ## 1. Visión General del Sistema y Estilo Arquitectónico
 
-**C-Emprende504** implementa una arquitectura **Jamstack (JavaScript, APIs, Markup)** basada en **Generación de Sitios Estáticos (Static Site Generation - SSG)** utilizando el motor **Astro**.
+**C-Emprende504** implementa una arquitectura **Jamstack (JavaScript, APIs, Markup)** estructurada como un **Monorepo gestionado mediante npm workspaces** con generación de sitios estáticos (**Static Site Generation - SSG**) utilizando **Astro**.
+
+Esta arquitectura permite gobernar desde un único repositorio el sitio principal (`apps/main`) y, progresivamente, desplegar múltiples micrositios independientes para nichos específicos (`apps/[nicho]`) que cuenten con dominios o subdominios propios.
 
 ```mermaid
 flowchart TD
-    subgraph Repo["Código y Contenido (Git)"]
-        Source["src/ (Componentes Astro, Layouts, Páginas)"]
-        Collections["src/content/products/ (Colecciones Tipadas)"]
-        Styles["src/styles/ (CSS Variables & Global)"]
-        Config["astro.config.mjs & tsconfig.json"]
+    subgraph Repo["Monorepo Central (Git)"]
+        RootPkg["package.json (Workspaces Root)"]
+        Packages["packages/ (Bibliotecas Compartidas)"]
+        subgraph Apps["apps/"]
+            MainSrc["apps/main/ (Sitio Principal)"]
+            FutureApps["apps/[nicho]/ (Futuros Micrositios)"]
+        end
     end
 
-    subgraph Build["Astro Build Pipeline (SSG)"]
-        TypeCheck["astro check (Validación TypeScript & Zod)"]
-        Compiler["Astro Compiler (Zero-JS por defecto)"]
-        Vite["Vite Asset Optimizer (CSS & SVGs)"]
+    subgraph Build["Astro Build Pipeline (SSG por Aplicación)"]
+        TypeCheck["npm run check (Validación TypeScript & Zod)"]
+        Compiler["Astro SSG Compiler (Zero-JS por defecto)"]
+        Vite["Vite Asset Optimizer (CSS & Assets)"]
     end
 
-    subgraph Dist["Artefactos Estáticos (dist/)"]
-        HTML["Páginas HTML5 Semánticas Pre-renderizadas"]
-        CSS["Hojas de Estilo Optimizadas"]
-        StaticAssets["public/ (Favicon, Robots, Headers)"]
+    subgraph Dist["Artefactos Estáticos Aislados"]
+        MainDist["apps/main/dist/ (HTML/CSS Pre-renderizado)"]
+        FutureDist["apps/[nicho]/dist/ (HTML/CSS Pre-renderizado)"]
     end
 
-    subgraph Edge["Cloudflare Pages (Global Anycast Edge)"]
-        CDN["300+ Ciudades / Distribución en el Borde"]
-        Security["SSL/TLS Automático + Reglas _headers"]
-        Cost["$0.00 / mes (Ancho de Banda Ilimitado)"]
+    subgraph Edge["Cloudflare Pages (Despliegues Independientes)"]
+        CFMain["Proyecto Cloudflare: Main<br>dominio-principal.com"]
+        CFFuture["Proyectos Cloudflare: Nichos<br>nicho.dominio-principal.com"]
     end
 
-    Source --> TypeCheck
-    Collections --> TypeCheck
+    MainSrc --> TypeCheck
     TypeCheck --> Compiler
-    Styles --> Vite
-    Compiler --> HTML
-    Vite --> CSS
-    StaticAssets --> Dist
-    HTML --> Dist
-    CSS --> Dist
-    Dist -->|Git Push / Despliegue Continuo| Edge
+    Compiler --> MainDist
+    MainDist -->|Despliegue Atómico| CFMain
+    FutureApps -.-> FutureDist
+    FutureDist -.-> CFFuture
 ```
 
 ### Principios Rectores:
-1. **Zero-JS por defecto:** Las páginas se generan como archivos HTML estáticos limpios sin sobrecarga de frameworks frontend (sin React, Vue ni Angular).
+1. **Zero-JS por Defecto:** Las páginas se generan como archivos HTML estáticos inmutables sin sobrecarga de frameworks frontend (sin React, Vue ni Angular).
 2. **Cero Infraestructura Activa:** No existe servidor Node.js ni base de datos activa en producción.
-3. **Desacoplamiento Estricto:** La lógica de presentación está separada del modelo de datos de los productos.
-4. **Mobile-First & Accesibilidad:** Diseñado prioritariamente para pantallas móviles bajo pautas WCAG 2.1 Nivel AA.
+3. **Desacoplamiento Estricto:** La lógica de presentación está separada del modelo de datos de los productos y cada aplicación en `apps/` tiene su propio ciclo de vida.
+4. **Despliegues Independientes:** Cada aplicación se compila y despliega de manera aislada en Cloudflare Pages.
+5. **Mobile-First & Accesibilidad:** Diseñado prioritariamente para pantallas móviles bajo pautas WCAG 2.1 Nivel AA.
 
 ---
 
-## 2. Arquitectura de Componentes
-
-La capa de presentación en `src/` se organiza en una jerarquía modular:
+## 2. Arquitectura de Directorios del Monorepo
 
 ```text
-src/
-├── layouts/
-│   └── BaseLayout.astro        # Layout maestro: HTML5, <head>, A11y skip-link, Header, Footer
-├── components/
-│   ├── layout/
-│   │   ├── Header.astro        # Cabecera sticky, navegación accesible, menú móvil sin dependencias
-│   │   └── Footer.astro        # Pie de página, avisos legales, copyright, enlaces institucionales
-│   ├── ui/
-│   │   └── Button.astro        # Botón polimórfico accesible (renderiza <a> o <button>)
-│   └── common/                 # Espacio reservado para metadatos SEO y componentes compartidos
-└── pages/                      # Rutas estáticas del sistema
-    ├── index.astro             # Home (Placeholder neutral de desarrollo)
-    ├── about.astro             # Acerca del proyecto y principios de arquitectura
-    ├── contact.astro           # Canal técnico de contacto (sin formularios CRM)
-    ├── privacy.astro           # Política de privacidad (marco de cero recolección de datos)
-    └── affiliate-disclosure.astro # Aviso de transparencia de afiliación (FTC)
+C-Emprende504/
+├── apps/                                 # Aplicaciones independientes
+│   └── main/                             # Sitio principal (@c-emprende504/main)
+│       ├── src/                          # Código fuente de la aplicación principal
+│       │   ├── assets/                   # Activos optimizados (images/, icons/)
+│       │   ├── components/               # Componentes UI modulares
+│       │   ├── content/                  # Colección tipada products (0 productos)
+│       │   ├── layouts/                  # BaseLayout.astro
+│       │   ├── pages/                    # Rutas estáticas (/about, /privacy, etc.)
+│       │   ├── styles/                   # Tokens CSS y estilos globales
+│       │   └── content.config.ts         # Esquema Zod de productos
+│       ├── public/                       # Activos estáticos públicos
+│       │   ├── favicon.svg               # Favicon
+│       │   └── media/                    # Carpetas organizadas para multimedia
+│       │       ├── videos/               # (.gitkeep)
+│       │       └── downloads/            # (.gitkeep)
+│       ├── astro.config.mjs              # Configuración SSG de Astro
+│       ├── package.json                  # Manifiesto workspace @c-emprende504/main
+│       └── tsconfig.json                 # Configuración TypeScript
+├── packages/                             # Espacio preparado para futuras bibliotecas compartidas
+│   └── README.md                         # Principio YAGNI y lineamientos de abstracción
+├── docs/                                 # Documentación técnica y estratégica central
+│   ├── ARCHITECTURE.md
+│   ├── DEVELOPMENT_GUIDE.md
+│   ├── INITIAL_TECHNICAL_ASSESSMENT.md
+│   ├── MULTI_SITE_STRATEGY.md
+│   └── PROJECT_DISCOVERY.md
+├── package.json                          # Configuración raíz de npm workspaces
+├── package-lock.json                     # Árbol de dependencias bloqueadas del monorepo
+├── tsconfig.json                         # Configuración TypeScript global (opcional)
+└── .gitignore                            # Exclusiones de Git optimizadas para monorepo
 ```
 
 ---
 
-## 3. Arquitectura de Datos: Colección de Productos (`products`)
+## 3. Arquitectura de Componentes (`apps/main`)
 
-El catálogo de infoproductos se gestiona de forma tipada mediante la API de **Content Collections** de Astro en `src/content.config.ts`.
+La capa de presentación en `apps/main/src/` mantiene una jerarquía modular:
 
-### 3.1. Esquema Zod (`src/content.config.ts`)
+- **Layouts (`apps/main/src/layouts/`):**
+  - `BaseLayout.astro`: Layout maestro con metadatos SEO, directiva `noindex, nofollow` para desarrollo, enlace de accesibilidad `.skip-link`, Header y Footer.
+- **Componentes de Layout (`apps/main/src/components/layout/`):**
+  - `Header.astro`: Cabecera sticky, navegación accesible y menú móvil sin dependencias externas.
+  - `Footer.astro`: Pie de página accesible con enlaces de navegación y páginas de cumplimiento legal.
+- **Componentes UI (`apps/main/src/components/ui/`):**
+  - `Button.astro`: Botón polimórfico accesible (renderiza `<a>` o `<button>`) con tamaño táctil mínimo de 44px.
+
+---
+
+## 4. Arquitectura de Datos: Esquema de Productos
+
+El catálogo de infoproductos se gestiona mediante la Content Layer API de Astro en `apps/main/src/content.config.ts`.
+
+### 4.1. Esquema Zod Ajustado en Sprint 2
 ```typescript
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
@@ -96,69 +122,66 @@ import { glob } from 'astro/loaders';
 
 const products = defineCollection({
   loader: glob({ pattern: '**/*.{md,json}', base: './src/content/products' }),
-  schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    description: z.string(),
-    category: z.string(),
-    featuredImage: z.string().optional(),
-    affiliateUrl: z.url(),
-    benefits: z.array(z.string()).default([]),
-    targetAudience: z.array(z.string()).default([]),
-    frequentlyAskedQuestions: z.array(
-      z.object({
-        question: z.string(),
-        answer: z.string(),
-      })
-    ).default([]),
-    status: z.enum(['draft', 'published', 'archived']).default('draft'),
-    publishedAt: z.coerce.date().optional(),
-  }),
+  schema: z
+    .object({
+      title: z.string(),
+      slug: z.string(),
+      description: z.string(),
+      category: z.string(),
+      featuredImage: z.string().optional(),
+      affiliateUrl: z.url().optional(), // Opcional en draft
+      benefits: z.array(z.string()).default([]),
+      targetAudience: z.array(z.string()).default([]),
+      frequentlyAskedQuestions: z.array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      ).default([]),
+      status: z.enum(['draft', 'published', 'archived']).default('draft'),
+      publishedAt: z.coerce.date().optional(),
+    })
+    .refine(
+      (data) => {
+        // En estado 'published', un producto de afiliación requiere obligatoriamente enlace de HotLink
+        if (data.status === 'published' && !data.affiliateUrl) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: 'Los productos publicados (status: "published") requieren obligatoriamente un affiliateUrl válido.',
+        path: ['affiliateUrl'],
+      }
+    ),
 });
 
 export const collections = { products };
 ```
 
-### 3.2. Regla de Catálogo Vacío en Fase de Cimientos
-En estricto cumplimiento con las restricciones del Sprint 1, el directorio `src/content/products/` contiene **cero productos** (solo un archivo `.gitkeep`). No se han generado precios ficticios, testimonios inventados ni enlaces falsos de afiliación.
+### 4.2. Reglas del Esquema:
+1. **Soporte de Borradores (Drafts):** Permite documentar fichas técnicas de infoproductos en borrador sin disponer aún de un HotLink autorizado.
+2. **Blindaje de Publicación:** Ningún producto puede pasar a estado `published` sin un enlace de afiliado válido, evitando enlaces rotos en campañas.
+3. **Cero Productos Simulados:** El catálogo se mantiene en **0 productos** en esta fase.
 
 ---
 
-## 4. Sistema de Diseño y Tokens CSS
+## 5. Organización y Manejo de Recursos Multimedia
 
-El sistema visual reside en `src/styles/` y se basa exclusivamente en variables nativas de CSS (CSS Custom Properties):
-
-- **Tokens (`src/styles/variables.css`):**
-  - Paleta neutral accesible (`--color-bg`, `--color-surface`, `--color-text`, `--color-border`).
-  - Colores de acento preliminares (`--color-primary`, `--color-secondary`).
-  - Escala tipográfica modular (`--text-xs` a `--text-4xl`) basada en sistema sans-serif del sistema operativo para evitar descargas bloqueantes de fuentes web.
-  - Escala de espaciado modular (`--space-1` a `--space-16`).
-  - Dimensiones de contenedor (`--container-max: 1200px`, `--container-narrow: 768px`).
-- **Normalización (`src/styles/global.css`):**
-  - Reset moderno (box-sizing, márgenes, alturas mínimas).
-  - Enlace de salto de accesibilidad (`.skip-link` para lectores de pantalla y navegación por teclado).
-  - Estados de foco visibles (`:focus-visible`) con contraste elevado.
-  - Botones accesibles con tamaño de toque táctil mínimo de 44px (`.btn`, `.btn-primary`, `.btn-secondary`, `.btn-outline`).
+- **Recursos Procesados (`apps/main/src/assets/`):** Imágenes e iconos procesados, redimensionados y optimizados a WebP/AVIF por Astro.
+- **Archivos Estáticos Públicos (`apps/main/public/media/`):** Carpetas dedicadas `videos/` y `downloads/` para archivos servidos de forma estática directa.
+- **Alojamiento Externo de Video:** Prohibición estricta de alojar videos de gran tamaño (VSL o demos) dentro del repositorio Git. Todo material audiovisual de gran tamaño se alojará en plataformas externas de streaming (YouTube no listado, Vimeo, Bunny Stream o Cloudflare Stream).
 
 ---
 
-## 5. Estrategia de Compilación y Despliegue en Cloudflare Pages
+## 6. Despliegue en Cloudflare Pages en Entorno Monorepo
 
-### 5.1. Configuración de Astro (`astro.config.mjs`)
-```javascript
-import { defineConfig } from 'astro/config';
+Cada aplicación se compila y sirve como un sitio estático aislado:
 
-export default defineConfig({
-  output: 'static',
-  build: {
-    format: 'directory' // Genera /ruta/index.html para URLs limpias
-  }
-});
-```
-
-### 5.2. Parámetros para Cloudflare Pages
-- **Framework Preset:** Astro
-- **Build Command:** `npm run build`
-- **Build Output Directory:** `dist`
-- **Node.js Version:** 20.x o superior (verificado con Node v24 localmente).
-- **Consumo de Recursos:** Costo $0.00 / mes (plan gratuito con solicitudes y ancho de banda ilimitados).
+- **Sitio Principal (`apps/main`):**
+  - **Root Directory:** `apps/main`
+  - **Build Command:** `npm run build`
+  - **Output Directory:** `dist`
+- **Futuros Micrositios (`apps/[nicho]`):**
+  - Mismo flujo con su respectivo subdirectorio como raíz en Cloudflare Pages.
+- **Cero Coste Operativo:** El plan gratuito de Cloudflare Pages soporta múltiples proyectos con dominios personalizados y ancho de banda ilimitado.

@@ -3,8 +3,8 @@
 **Rol:** Senior Business Analyst & Software Architect  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.1.0 (Descubrimiento Aprobado & Sprint 1 en Ejecución)  
-**Estado:** Arquitectura Astro Aprobada por el Project Manager  
+**Versión:** 1.2.0 (Sprint 2 — Monorepo Multi-Sitio Implementado)  
+**Estado:** Arquitectura Monorepo y Escalabilidad Aprobada  
 
 ---
 
@@ -60,6 +60,23 @@ El proyecto se concibe bajo una premisa fundamental de eficiencia financiera: **
    *¿El tráfico se enviará de forma 100% directa desde las landing pages al checkout de Hotmart, o se contempla capturar prospectos mediante grupos de WhatsApp/Telegram o listas de correo antes de la venta?*
 4. **¿Disponibilidad de Activos y Hotlinks Iniciales?**  
    *¿Cuáles son los primeros 1 a 3 productos de Hotmart aprobados para afiliación con los que comenzaremos la arquitectura de prueba y validación?*
+
+### 3.3. Catálogo de Nichos Potenciales (Planificación Estratégica)
+Durante la planificación del modelo de escalabilidad multi-sitio (Sprint 2), se identificaron 10 categorías de productos digitales con potencial comercial en el ecosistema de Hotmart para la creación progresiva de micrositios independientes:
+
+1. **Finanzas:** Inversiones, ahorro, fiscalidad y finanzas personales.
+2. **Salud y Bienestar:** Nutrición, entrenamiento, reducción de estrés y salud preventiva.
+3. **Belleza y Estética:** Cuidado personal, técnicas de belleza y estética profesional.
+4. **Mascotas:** Adiestramiento, alimentación y bienestar canino/felino.
+5. **Marketing Digital:** Tráfico pago, contenidos, embudos y copywriting.
+6. **Inteligencia Artificial:** Automatización, prompts y herramientas para creadores y empresas.
+7. **Desarrollo Personal:** Productividad, hábitos, oratoria y liderazgo.
+8. **Negocios Online:** Emprendimiento, agencias, freelancing y comercio electrónico.
+9. **Relaciones:** Habilidades blandas, comunicación de pareja y vínculos familiares.
+10. **Espiritualidad:** Mindfulness, meditación y crecimiento interior.
+
+> [!NOTE]
+> **Condición de Validación:** Estas categorías son oportunidades de estudio, **no decisiones comerciales definitivas**. Ningún micrositio será creado hasta completar la validación de demanda, calidad de cursos en Hotmart, aprobación de comisiones y viabilidad comercial.
 
 ---
 

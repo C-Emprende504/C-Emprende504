@@ -1,33 +1,34 @@
-# C-Emprende504 — Plataforma de Marketing de Afiliados (Hotmart)
+# C-Emprende504 — Plataforma Central y Monorepo Multi-Sitio
 
-Bienvenido al repositorio oficial del proyecto **C-Emprende504**, una plataforma web moderna, modular y de alto rendimiento diseñada para la promoción, descubrimiento y comercialización de productos digitales (cursos online, programas formativos y certificaciones) a través del programa de afiliados de **Hotmart**.
+Bienvenido al repositorio central del proyecto **C-Emprende504**, una plataforma web moderna, escalable y de alto rendimiento diseñada como un **monorepo con npm workspaces y Astro**.
 
----
-
-## 1. Visión y Propósito del Proyecto
-
-**C-Emprende504** nace con el objetivo de servir como puente de confianza entre audiencias hispanohablantes interesadas en emprendimiento, desarrollo profesional y habilidades de alta demanda, y los mejores infoproductos educativos de la plataforma Hotmart.
-
-El proyecto está diseñado para:
-- Promocionar infoproductos de calidad seleccionados con criterios de alta satisfacción y garantía.
-- Proveer **Landing Pages de alta conversión** optimizadas para tráfico móvil derivado de campañas publicitarias (Meta Ads, TikTok Ads, Google Ads).
-- Garantizar la **atribución íntegra de comisiones de afiliados** mediante el rastreo y propagación de parámetros UTM y el parámetro `sck` de Hotmart en fases posteriores.
-- Mantener un **coste operativo de infraestructura recurrente de $0.00 USD/mes** mediante el despliegue de arquitectura estática en **Cloudflare Pages**.
-- Cumplir estrictamente con normativas legales de comercio electrónico y políticas de plataformas de publicidad (Meta Ads, Google Ads, FTC).
-
----
-
-## 2. Estado Actual del Proyecto (Sprint 1 Completado)
+La plataforma permite gobernar desde un único repositorio un **sitio principal** (`apps/main`) y, progresivamente, **micrositios verticales independientes** (`apps/[nicho]`) orientados a la promoción y comercialización ética de productos digitales educativos del programa de afiliados de **Hotmart**.
 
 > [!NOTE]
-> **Fase Actual: Sprint 1 — Cimientos de Infraestructura & Inicialización de Astro**  
-> Se ha completado la inicialización de la arquitectura base: Git inicializado, Astro configurado en modo estático (SSG), colección de contenido tipada `products` configurada (con 0 productos reales o ficticios), sistema de diseño CSS neutral y componentes accesibles de navegación y layout.
+> **Identificador Interno:** `C-Emprende504` es el nombre interno del proyecto técnico. La marca comercial pública, dominio definitivo y eslóganes se definirán y aprobarán en fases posteriores.
 
-- **Espacio de Trabajo Local:** Configurado y validado.
-- **Control de Versiones (Git):** Inicializado en rama `main` con `.gitignore` exhaustivo.
-- **Motor SSG:** Astro `v7.4.12` instalado y verificado (`output: 'static'`).
-- **Diagnósticos de Código:** `npm run check` (0 errores, 0 advertencias, 0 hints).
-- **Compilación Estática:** `npm run build` verificado exitosamente (5 rutas estáticas generadas).
+---
+
+## 1. Visión y Modelo de Negocio
+
+- **Sitio Principal (`apps/main`):** Portal central de descubrimiento, catálogo general y presentación institucional.
+- **Micrositios Verticales (Futuros):** Sitios web independientes para nichos que demuestren validación comercial y disponibilidad de infoproductos de alta calidad.
+- **Subdominios y Dominios Propios:** Cada aplicación en `apps/` podrá contar con su propio subdominio o dominio personalizado desplegado como proyecto independiente en **Cloudflare Pages**.
+- **Coste de Infraestructura $0.00/mes:** Arquitectura Jamstack pura con generación estática (SSG) inmutable y distribución Anycast en el Edge.
+
+---
+
+## 2. Estado Actual del Proyecto (Sprint 2 Completado)
+
+> [!TIP]
+> **Fase Actual: Sprint 2 — Arquitectura Multi-Sitio y Escalabilidad**  
+> Se completó la migración hacia una arquitectura monorepo con npm workspaces. La aplicación principal reside en `apps/main/`, el directorio `packages/` queda preparado para futuras bibliotecas compartidas, y el esquema de productos ahora permite registrar fichas en estado borrador (`draft`) sin enlace de afiliado.
+
+- **Estructura del Proyecto:** Monorepo con npm workspaces (`apps/*`, `packages/*`).
+- **Sitio Principal:** Ubicado en `apps/main/` (`@c-emprende504/main`).
+- **Historial de Git:** Preservado íntegramente mediante migraciones rastreadas con `git mv`.
+- **Diagnósticos de Código:** `npm run check` pasando con 0 errores, 0 advertencias y 0 hints.
+- **Compilación Estática:** `npm run build` genera exitosamente 5 páginas estáticas en `apps/main/dist/` en ~2.4s.
 
 ---
 
@@ -35,80 +36,83 @@ El proyecto está diseñado para:
 
 La documentación del proyecto sigue estándares de arquitectura empresarial:
 
-1. 📄 **[Documento de Descubrimiento del Proyecto (`docs/PROJECT_DISCOVERY.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/PROJECT_DISCOVERY.md)**
-   - Resumen del proyecto, objetivos de negocio (CTR $\ge 15\%$, coste \$0/mes).
-   - Requisitos funcionales y no funcionales detallados.
-   - Alternativas tecnológicas evaluadas y resoluciones del Sprint 1.
-   - Consideraciones de despliegue en Cloudflare Pages, seguridad y cumplimiento publicitario.
+1. 📄 **[Estrategia Multi-Sitio y Escalabilidad (`docs/MULTI_SITE_STRATEGY.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/MULTI_SITE_STRATEGY.md)**
+   - Justificación del modelo monorepo y funcionamiento de npm workspaces.
+   - Catálogo de las 10 categorías de nichos potenciales identificados.
+   - Requisitos de validación previa requeridos antes de abrir un micrositio.
+   - Procedimiento para crear nuevos micrositios y preparación para subdominios en Cloudflare Pages.
+   - Políticas de almacenamiento multimedia y exclusión de videos pesados.
 
-2. 📄 **[Evaluación Técnica Inicial y Factibilidad (`docs/INITIAL_TECHNICAL_ASSESSMENT.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/INITIAL_TECHNICAL_ASSESSMENT.md)**
-   - Resultados de la inspección técnica del entorno de trabajo.
-   - Evaluación de factibilidad de coste cero ($0/mes) y Core Web Vitals móviles.
-   - Análisis comparativo ponderado de alternativas de frontend (Astro vs Vite/HTML5 vs Next.js).
-   - Arquitectura de trazabilidad de enlaces de afiliados y preservación de UTMs.
+2. 📄 **[Arquitectura de Software (`docs/ARCHITECTURE.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/ARCHITECTURE.md)**
+   - Visión del sistema Jamstack y compilación estática (SSG) con Astro.
+   - Arquitectura de componentes, layouts y estilos CSS modulares.
+   - Esquema Zod de productos con validación condicional (`draft` vs `published`).
+   - Lineamientos de despliegue independiente en Cloudflare Pages.
 
-3. 📄 **[Arquitectura de Software (`docs/ARCHITECTURE.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/ARCHITECTURE.md)**
-   - Visión general del sistema Jamstack y compilación estática.
-   - Arquitectura de componentes UI y layouts.
-   - Diseño del esquema tipado Zod para colecciones de productos.
-   - Sistema de diseño de CSS Tokens y accesibilidad (WCAG 2.1 AA).
-   - Especificaciones para el despliegue en Cloudflare Pages.
+3. 📄 **[Guía de Desarrollo y Operaciones (`docs/DEVELOPMENT_GUIDE.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/DEVELOPMENT_GUIDE.md)**
+   - Comandos de desarrollo centralizados en la raíz.
+   - Gestión de dependencias en workspaces de npm.
+   - Procedimiento técnico para añadir un nuevo micrositio y registrar productos.
+   - Flujo de trabajo en Git y Conventional Commits.
 
-4. 📄 **[Guía de Desarrollo y Operaciones (`docs/DEVELOPMENT_GUIDE.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/DEVELOPMENT_GUIDE.md)**
-   - Prerrequisitos de entorno (Node.js, npm, Git).
-   - Comandos estándar de desarrollo (`dev`, `build`, `preview`, `check`).
-   - Flujo de trabajo en Git con Conventional Commits.
-   - Procedimiento paso a paso para incorporar un nuevo producto al catálogo.
+4. 📄 **[Documento de Descubrimiento del Proyecto (`docs/PROJECT_DISCOVERY.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/PROJECT_DISCOVERY.md)**
+   - Visión de negocio, público objetivo y requisitos funcionales y no funcionales.
+   - Alternativas evaluadas y resoluciones de los sprints.
+
+5. 📄 **[Evaluación Técnica Inicial y Factibilidad (`docs/INITIAL_TECHNICAL_ASSESSMENT.md`)](file:///home/cristiamsanchez/Documents/VSCodeProjects/ProyectoComerciosAfiliados/C-Emprende504/docs/INITIAL_TECHNICAL_ASSESSMENT.md)**
+   - Resultados de inspecciones de entorno y factibilidad de coste cero.
 
 ---
 
-## 4. Comandos de Desarrollo
+## 4. Comandos de Desarrollo (Monorepo)
+
+Ejecutables desde la raíz del proyecto:
 
 | Comando | Acción |
 | :--- | :--- |
-| `npm run dev` | Inicia el servidor de desarrollo local con recarga en caliente. |
-| `npm run build` | Compila la aplicación en HTML/CSS estático dentro de `dist/`. |
-| `npm run preview` | Previsualiza localmente el artefacto estático generado en `dist/`. |
-| `npm run check` | Ejecuta diagnósticos de TypeScript y esquemas Zod con `@astrojs/check`. |
+| `npm install` | Instala y enlaza las dependencias de todos los workspaces del monorepo. |
+| `npm run dev` | Inicia el servidor de desarrollo local del sitio principal (`apps/main`). |
+| `npm run build` | Compila el sitio principal en HTML/CSS estático dentro de `apps/main/dist/`. |
+| `npm run preview` | Previsualiza localmente el artefacto estático de `apps/main/dist/`. |
+| `npm run check` | Ejecuta diagnósticos de Astro, TypeScript y esquemas Zod en `apps/main`. |
 
 ---
 
-## 5. Estructura del Proyecto
+## 5. Estructura de Directorios
 
 ```text
 C-Emprende504/
-├── docs/                         # Documentación técnica completa
-├── public/                       # Activos estáticos públicos
-│   └── favicon.svg               # Favicon SVG
-├── src/                          # Código fuente
-│   ├── assets/                   # Activos procesados (imágenes, iconos)
-│   ├── components/               # Componentes modulares
-│   │   ├── layout/               # Header.astro, Footer.astro
-│   │   └── ui/                   # Button.astro
-│   ├── content/                  # Almacén de contenidos
-│   │   └── products/             # Ficheros de producto (0 productos en Sprint 1)
-│   ├── layouts/                  # Plantillas maestras (BaseLayout.astro)
-│   ├── pages/                    # Rutas estáticas del sitio
-│   │   ├── index.astro           # Portada neutral de desarrollo
-│   │   ├── about.astro           # Acerca del proyecto
-│   │   ├── contact.astro         # Canales de supervisión
-│   │   ├── privacy.astro         # Política de privacidad
-│   │   └── affiliate-disclosure.astro # Aviso de afiliación FTC
-│   ├── styles/                   # Sistema de diseño CSS
-│   │   ├── global.css            # Reset, A11y y utilidades
-│   │   └── variables.css         # Tokens de diseño CSS
-│   └── content.config.ts         # Esquema tipado Zod para productos
-├── astro.config.mjs              # Configuración SSG de Astro
-├── package.json                  # Dependencias y scripts
-├── tsconfig.json                 # Configuración TypeScript estricta
-└── .gitignore                    # Reglas de exclusión de Git
+├── apps/                                 # Aplicaciones independientes
+│   └── main/                             # Sitio principal (@c-emprende504/main)
+│       ├── public/                       # Activos estáticos directos
+│       │   ├── favicon.svg               # Favicon preliminar
+│       │   └── media/                    # Carpetas organizadas para multimedia
+│       │       ├── downloads/            # Documentos y descargables (.gitkeep)
+│       │       └── videos/               # (.gitkeep - Videos pesados se alojan externamente)
+│       ├── src/                          # Código fuente Astro
+│       │   ├── assets/                   # Activos optimizados (images/, icons/)
+│       │   ├── components/               # Header, Footer, Button
+│       │   ├── content/                  # Colecciones tipadas (0 productos)
+│       │   ├── layouts/                  # BaseLayout.astro
+│       │   ├── pages/                    # Rutas estáticas (/about, /privacy, etc.)
+│       │   ├── styles/                   # global.css y variables.css
+│       │   └── content.config.ts         # Esquema Zod (affiliateUrl opcional en draft)
+│       ├── astro.config.mjs              # Configuración SSG de Astro
+│       ├── package.json                  # Manifiesto workspace @c-emprende504/main
+│       └── tsconfig.json                 # TypeScript estricto
+├── packages/                             # Bibliotecas compartidas (preparado estructuralmente)
+│   └── README.md                         # Lineamientos de abstracción (YAGNI)
+├── docs/                                 # Documentación técnica completa
+├── package.json                          # Manifiesto raíz de npm workspaces
+├── package-lock.json                     # Lockfile sincronizado del monorepo
+└── .gitignore                            # Exclusiones de Git optimizadas para monorepo
 ```
 
 ---
 
 ## 6. Gobernanza y Reglas de Desarrollo
 
-El equipo de desarrollo se adhiere a las diez reglas fundamentales de ingeniería y negocio:
+El equipo se adhiere estrictamente a las diez reglas fundamentales de ingeniería y negocio:
 
 1. **Decisiones Arquitectónicas:** No se toman decisiones mayores sin presentar alternativas y su respectiva justificación técnica.
 2. **Sin Backend Innecesario:** No asumir que el proyecto requiere un backend o base de datos propia; toda la gestión transaccional se apoya en Hotmart.

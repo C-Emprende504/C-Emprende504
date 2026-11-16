@@ -3,8 +3,8 @@
 **Rol:** Senior Software Architect & Technical Project Analyst  
 **Supervisión:** Project Manager (ChatGPT)  
 **Fecha:** 16 de noviembre de 2026  
-**Versión:** 1.1.0 (Sprint 1 Ejecutado)  
-**Estado:** Evaluación Base Completada y Cimientos Astro Inicializados  
+**Versión:** 1.2.0 (Sprint 2 Ejecutado)  
+**Estado:** Arquitectura Monorepo y Escalabilidad Multi-Sitio Implementada  
 
 ---
 
@@ -28,12 +28,17 @@ Sistema Operativo: Linux x86_64
 | **Gestor de Paquetes (npm)** | Instalado (`11.17.0`) | Disponible en el path del sistema. |
 | **Python** | Instalado (`python3` en `/usr/bin/python3`) | Disponible en el sistema operativo. |
 
-### 1.2. Estado Actualizado tras la Inicialización (Sprint 1)
-- **Control de Versiones:** Repositorio Git inicializado exitosamente en rama `main` con reglas `.gitignore` completas y commit raíz inicial convencional.
-- **Motor SSG:** Astro `v7.4.12` instalado y configurado con salida estática inmutable (`output: 'static'`).
-- **Colección de Contenidos:** Esquema tipado Zod en `src/content.config.ts` para `products` con 0 productos registrados (catálogo limpio).
-- **Herramientas de Diagnóstico:** `@astrojs/check` y `typescript` instalados como devDependencies (`npm run check` pasando con 0 errores, 0 advertencias, 0 hints).
-- **Compilación Estática:** `npm run build` genera exitosamente las 5 rutas estáticas (`/`, `/about`, `/contact`, `/privacy`, `/affiliate-disclosure`) en `dist/` en 1.6 segundos.
+### 1.2. Estado tras la Inicialización (Sprint 1)
+- Repositorio Git inicializado en rama `main`.
+- Astro `v7.4.12` instalado y configurado con salida estática inmutable (`output: 'static'`).
+- Colección de contenido tipada `products` configurada con 0 productos.
+
+### 1.3. Estado tras la Migración Monorepo (Sprint 2)
+- **Estructura Monorepo:** Aplicación migrada a `apps/main/` mediante `git mv` conservando el 100% del historial de Git.
+- **npm Workspaces:** Configurado en la raíz (`package.json`) con scripts delegados (`npm run dev`, `build`, `check`) hacia `@c-emprende504/main`.
+- **Esquema de Productos Refinado:** `affiliateUrl` opcional para fichas técnicas en borrador (`draft`) y obligatorio para productos publicados (`published`).
+- **Organización Multimedia:** Estructura creada en `apps/main/public/media/videos/` y `apps/main/public/media/downloads/` con exclusión de videos pesados en Git.
+- **Validación Técnica:** `npm run check` y `npm run build` ejecutados desde la raíz pasando con 0 errores y 5 páginas estáticas generadas en `apps/main/dist/`.
 
 ---
 
