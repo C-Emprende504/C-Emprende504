@@ -6,14 +6,37 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  ogType?: 'website' | 'article';
 }
 
 const {
   title,
-  description = 'C-Emprende504 — Plataforma de cimientos para marketing de afiliados de productos digitales.',
+  description = 'C-Emprende504 — Plataforma central para el impulso y descubrimiento de habilidades digitales.',
+  canonical,
+  noindex = false,
+  nofollow = false,
+  ogType = 'website',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://c-emprende504.pages.dev');
+// Nota técnica SEO: Se evita emitir una URL canónica fija mientras no exista un dominio definitivo configurado en Astro.site.
+const canonicalURL = canonical || (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+const pageTitle = `${title} | C-Emprende504`;
+
+// Control centralizado de indexación para el dominio temporal:
+// Mientras no exista un dominio oficial configurado en Astro.site:
+// - Páginas públicas: 'noindex, follow' (permite el rastreo de enlaces pero evita indexar el dominio técnico .pages.dev).
+// - Página 404 / error: 'noindex, nofollow' (aislamiento total de rutas no encontradas).
+// Cuando se declare el dominio definitivo en astro.config.mjs (Astro.site definido),
+// las páginas públicas conmutarán automáticamente a 'index, follow'.
+const hasOfficialDomain = Boolean(Astro.site);
+const robotsDirective = (noindex || nofollow)
+  ? 'noindex, nofollow'
+  : hasOfficialDomain
+    ? 'index, follow'
+    : 'noindex, follow';
 ---
 
 <!doctype html>
@@ -25,12 +48,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://c-empren
     <meta name="generator" content={Astro.generator} />
 
     <!-- Metadatos Básicos y SEO -->
-    <title>{title} | C-Emprende504</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
 
-    <!-- Directiva de indexación neutral para entorno de desarrollo -->
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- Open Graph Básico -->
+    <meta property="og:site_name" content="C-Emprende504" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="es_HN" />
+    {canonicalURL && <meta property="og:url" content={canonicalURL} />}
+
+    <!-- Twitter Card Básico -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Control de Indexación -->
+    <meta name="robots" content={robotsDirective} />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>

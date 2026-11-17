@@ -1,0 +1,7 @@
+# robots.txt — C-Emprende504
+# Permite el rastreo público del portal en fase de preparación técnica.
+# NOTA: No se declara sitemap con dominio provisional para evitar indexación canónica incorrecta.
+# El archivo sitemap.xml y la directiva Sitemap: se configurarán cuando exista un dominio comercial definitivo.
+
+User-agent: *
+Allow: /
